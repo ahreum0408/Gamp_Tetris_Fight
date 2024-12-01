@@ -11,7 +11,7 @@ void IdleState::Update(Defender* player) {
     if (player->IsJumpKeyPressed()) {
         player->GetStateMachine()->ChangeState(new JumpState());
     }
-    else if (!player->IsGrounded()) {
+    if (!player->IsGrounded()) {
         player->GetStateMachine()->ChangeState(new FallState());
     }
 }

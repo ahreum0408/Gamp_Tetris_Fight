@@ -17,12 +17,13 @@ public:
 	virtual void ExitCollision(Collider* _other) override;
 	// 상태 관리
 	StateMachine<Defender>* GetStateMachine() const { return m_stateMachine; }
-	void PerformJump();
+	void Jump();
 	bool IsGrounded() const { return m_isGrounded; }
 	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::SPACE); }
 	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
 private:
 	bool IsGround(Collider* self, Collider* other);
+	void SetJumpCount() { m_jumpCount = 0; }
 private:
 	enum class DefenderState {
 		Idle, Jump, Fall

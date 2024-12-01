@@ -4,7 +4,7 @@
 
 void JumpState::Enter(Defender* player) {
     std::cout << "Entering Jump State" << std::endl;
-    player->PerformJump(); // 점프 실행
+    player->Jump(); // 점프 실행
 }
 
 void JumpState::Update(Defender* player) {

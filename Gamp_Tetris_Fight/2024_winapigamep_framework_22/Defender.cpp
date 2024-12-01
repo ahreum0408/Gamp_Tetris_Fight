@@ -45,6 +45,7 @@ void Defender::Update() {
     if (m_isGrounded)
     {
         m_vVelocity.y = 0; // 중력 가속도를 초기화
+        SetJumpCount();
     }
     SetPos(vPos);
 }
@@ -54,6 +55,7 @@ void Defender::EnterCollision(Collider* _other)
     if (IsGround(m_collider, _other)) {
         m_isGrounded = true;
         m_vVelocity.y = 0; // 중력 가속도를 초기화
+        SetJumpCount();
     }
 }
 
@@ -71,7 +73,7 @@ void Defender::ExitCollision(Collider* _other)
         m_isGrounded = false;
     }
 }
-void Defender::PerformJump() {
+void Defender::Jump() {
     if (m_jumpCount < m_maxJumpCount) {
          m_isGrounded = false;         // 점프 상태로 전환
         m_jumpCount++;
