@@ -1,0 +1,44 @@
+#pragma once
+enum class LAYER
+{
+	DEFAULT,
+	BACKGROUND,
+	Wall,
+	PLAYER,
+	PROJECTILE,
+	BLOCK,
+	ENEMY,
+	// UI
+	END = 30
+};
+
+enum class PEN_TYPE
+{
+	HOLLOW, RED, GREEN,
+	BLUE, YELLOW, END
+};
+
+enum class BRUSH_TYPE
+{
+	HOLLOW, RED, GREEN,
+	BLUE, YELLOW, END
+};
+
+
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT,
+	DELETE_OBJECT,
+	SCENE_CHANGE,
+	END,
+};
+
+
+enum class BLOCK_TYPE
+{
+	BLOCK_I = 0, BLOCK_J, BLOCK_L,
+	BLOCK_O, BLOCK_S, BLOCK_Z,
+	BLOCK_T,
+
+	NONE = 30
+};	
