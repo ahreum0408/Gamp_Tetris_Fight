@@ -18,12 +18,10 @@ public:
 	// 상태 관리
 	StateMachine<Defender>* GetStateMachine() const { return m_stateMachine; }
 	void PerformJump();
-	bool IsGrounded() const;
-	bool IsJumpKeyPressed() const;
-	bool IsFalling() const;
+	bool IsGrounded() const { return m_isGrounded; }
+	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::SPACE); }
+	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
 private:
-	//void Jump();
-	//void ApplyGravity();
 	bool IsGround(Collider* self, Collider* other);
 private:
 	enum class DefenderState {
@@ -34,10 +32,11 @@ private:
 	StateMachine<Defender>* m_stateMachine;
 	int m_jumpCount;
 	const int m_maxJumpCount;
-	float m_verticalSpeed;
 
 	bool m_isGrounded;
 	const float m_jumpPower = 300.f;
 	const float m_gravity = 980.f;
 	Vec2 m_vVelocity;
+
+	Vec2 m_beforePos;
 };
