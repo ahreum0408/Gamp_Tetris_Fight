@@ -211,6 +211,12 @@
     <ClInclude Include="JumpState.h">
       <Filter>Engine\03. Object\Player\Defender\State</Filter>
     </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -357,6 +363,12 @@
     </ClCompile>
     <ClCompile Include="JumpState.cpp">
       <Filter>Engine\03. Object\Player\Defender\State</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
