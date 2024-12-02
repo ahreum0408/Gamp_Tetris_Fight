@@ -31,7 +31,7 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::EnterCollision(Collider* _other)
 {
-	std::cout << "Enter" << std::endl;
+	//std::cout << "Enter" << std::endl;
 	Object* pOtherObj = _other->GetOwner();
 	wstring str = pOtherObj->GetName();
 	if (pOtherObj->GetName() == L"PlayerBullet")
@@ -49,5 +49,5 @@ void Enemy::StayCollision(Collider* _other)
 
 void Enemy::ExitCollision(Collider* _other)
 {
-	std::cout << "Exit" << std::endl;
+	//std::cout << "Exit" << std::endl;
 }

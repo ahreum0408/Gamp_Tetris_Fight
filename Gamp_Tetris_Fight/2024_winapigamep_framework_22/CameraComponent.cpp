@@ -33,7 +33,6 @@ void CameraComponent::ShakeCamera()
 	std::uniform_int_distribution<int> distX(-3, 3);	
 	std::uniform_int_distribution<int> distY(-3, 3);
 
-	cout << "move";
 	pos.x += distX(mt);
 	pos.y += distY(mt);
 

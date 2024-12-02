@@ -4,7 +4,7 @@
 #include "JumpState.h"
 
 void FallState::Enter(Defender* player) {
-    std::cout << "Entering Fall State" << std::endl;
+    player->PlayFallAnimation();
 }
 
 void FallState::Update(Defender* player) {
@@ -17,5 +17,4 @@ void FallState::Update(Defender* player) {
 }
 
 void FallState::Exit(Defender* player) {
-    std::cout << "Exiting Fall State" << std::endl;
 }

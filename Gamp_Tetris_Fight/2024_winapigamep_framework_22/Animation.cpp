@@ -52,8 +52,6 @@ void Animation::Render(HDC _hdc)
 	vPos = vPos + m_vecAnimFrame[m_CurFrame].vOffset;
 
 	TransparentBlt(_hdc
-		//, (int)(vPos.x - m_vecAnimFrame[m_CurFrame].vSlice.x / 2)
-		//, (int)(vPos.y - m_vecAnimFrame[m_CurFrame].vSlice.y / 2)
 		, (int)(vPos.x - m_vecAnimFrame[m_CurFrame].vSlice.x / 2 - ((int)camerapos.x))
 		, (int)(vPos.y - m_vecAnimFrame[m_CurFrame].vSlice.y / 2 - ((int)camerapos.y))
 		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.x)
@@ -63,7 +61,7 @@ void Animation::Render(HDC _hdc)
 		, (int)(m_vecAnimFrame[m_CurFrame].vLT.y)
 		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.x)
 		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.y)
-		, RGB(255, 0, 255));
+		, RGB(0, 0, 0));
 }
 
 void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, int _framecount, float _fDuration, bool _isRotate)

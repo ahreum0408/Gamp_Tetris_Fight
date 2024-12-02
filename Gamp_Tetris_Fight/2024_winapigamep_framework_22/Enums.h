@@ -9,7 +9,7 @@ enum class LAYER
 	BLOCK,
 	ENEMY,
 	// UI
-	END = 30
+	END
 };
 
 enum class PEN_TYPE

@@ -10,25 +10,24 @@
 #include "Collider.h"
 #include "Animator.h"
 //#include "Animation.h"
-//#include "CameraComponent.h"
 #include "Striker.h"
 
 Player::Player()
 	: m_pTex(nullptr), m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)
 {
+	this->AddComponent<Collider>();
+	GetComponent<Collider>()->SetSize({ 35,50 });
+	m_collider = GetComponent<Collider>();
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\planem.bmp";
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
-	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 35,50 });
-	m_collider = GetComponent<Collider>();
+	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 
-	AddComponent<Animator>();
+	/*AddComponent<Animator>();
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f), Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
+	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);*/
 }
 Player::~Player()
 {
@@ -76,7 +75,7 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	cout << "ENTER" << endl;
+	//cout << "ENTER" << endl;
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Wall")
 	{
