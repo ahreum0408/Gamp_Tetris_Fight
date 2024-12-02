@@ -5,7 +5,8 @@
 #include "Block.h"
 class Board :
     public Object
-{public:
+{
+public:
     Board();
     ~Board();
 
@@ -34,10 +35,14 @@ private:
     const int boardHeight = 20; // 보드 세로 크기
 
     // Block Down
-    bool isSkill = false;
     int moveDownTimer = 0;
     int currentMoveDownDelay = 200;
     const int moveDownDelay = 200;
+
+    // Skill
+    bool isSkill = false;
+    int skillCnt = 0;
+    int canSkillCnt = 4;
 
     Texture* m_pTex;
 

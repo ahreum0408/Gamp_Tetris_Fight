@@ -13,13 +13,7 @@ Block::Block(wstring path) :
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ BLOCK_SIZE, BLOCK_SIZE });
 }
-
 Block::~Block() {}
-
-void Block::Update()
-{
-	
-}
 
 void Block::Render(HDC _hdc)
 {
@@ -35,6 +29,9 @@ void Block::Render(HDC _hdc)
 		m_pTex->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
 	//ComponentRender(_hdc);
+}
+void Block::Update()
+{
 }
 
 void Block::EnterCollision(Collider* _other)
