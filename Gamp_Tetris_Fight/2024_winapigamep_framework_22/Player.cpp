@@ -75,7 +75,6 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	//cout << "ENTER" << endl;
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Wall")
 	{

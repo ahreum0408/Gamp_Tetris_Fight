@@ -32,7 +32,8 @@ void GameScene::Init()
         leftWall->SetPos({ leftEdge - 125, m_boardPos.y });
         leftWall->SetSize({ 50, (int)m_boardSize.y });
 		leftWall->SetWallSize(leftWall->GetSize());
-		leftWall->SetName(L"Wall");
+		leftWall->SetName(L"SideWall");
+		leftWall->SetID(11);
         AddObject(leftWall, LAYER::Wall);
 
         // Right Wall
@@ -40,7 +41,8 @@ void GameScene::Init()
         rightWall->SetPos({ rightEdge + -75, m_boardPos.y });
         rightWall->SetSize({ 50, (int)m_boardSize.y });
 		rightWall->SetWallSize(rightWall->GetSize());
-		rightWall->SetName(L"Wall");
+		rightWall->SetName(L"SideWall");
+		rightWall->SetID(12);
         AddObject(rightWall, LAYER::Wall);
 
         // Bottom Wall
@@ -48,7 +50,8 @@ void GameScene::Init()
         bottomWall->SetPos({ m_boardPos.x - 100, bottomEdge + 25 });
         bottomWall->SetSize({ (int)m_boardSize.x, 50 });
 		bottomWall->SetWallSize(bottomWall->GetSize());
-		bottomWall->SetName(L"Wall");
+		bottomWall->SetName(L"BottomWall");
+		bottomWall->SetID(13);
         AddObject(bottomWall, LAYER::Wall);
     }
 	{

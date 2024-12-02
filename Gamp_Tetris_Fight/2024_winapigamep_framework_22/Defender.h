@@ -20,7 +20,7 @@ public:
 	StateMachine<Defender>* GetStateMachine() const { return m_stateMachine; }
 	void Jump();
 	bool IsGrounded() const { return m_isGrounded; }
-	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::SPACE); }
+	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::UP); }
 	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
 public:
 	void PlayIdleAnimation(){ animator->PlayAnimation(L"RedDinoIdle", true); }

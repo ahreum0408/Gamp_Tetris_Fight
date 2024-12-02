@@ -65,6 +65,7 @@ void Defender::Update() {
 
 void Defender::EnterCollision(Collider* _other)
 {
+    cout << "enter" << endl;
     if (IsGround(m_collider, _other)) {
         m_isGrounded = true;
         m_vVelocity.y = 0; // 중력 가속도를 초기화
@@ -100,7 +101,7 @@ void Defender::Jump() {
 bool Defender::IsGround(Collider* self, Collider* other)
 {
     wstring name = other->GetOwner()->GetName();
-    if (name == L"Wall" || name == L"Block") {
+    if (name == L"BottomWall" || name == L"Block") {
         return true;
     }
     return false;
