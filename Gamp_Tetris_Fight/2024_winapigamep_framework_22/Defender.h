@@ -27,13 +27,14 @@ public:
 	void PlayJumpAnimation(){ animator->PlayAnimation(L"RedDinoJump", true); }
 	void PlayFallAnimation(){ animator->PlayAnimation(L"RedDinoFall", true); }
 private:
-	bool IsGround(Collider* self, Collider* other);
+	bool IsGround(Collider* other);
+	bool IsSideWall(Collider* other);
 	void SetJumpCount() { m_jumpCount = 0; }
 private:
 	enum class DefenderState {
 		Idle, Jump, Fall
 	};
-
+	Texture* m_pTex;
 private:
 	StateMachine<Defender>* m_stateMachine;
 	int m_jumpCount;

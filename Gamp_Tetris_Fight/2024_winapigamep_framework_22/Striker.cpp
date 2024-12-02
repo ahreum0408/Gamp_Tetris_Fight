@@ -9,10 +9,11 @@
 Striker::Striker() {
 	this->AddComponent<CameraComponent>();
 	m_collider->SetID(1);
+	m_collider->SetSize({ 35,40 });
 
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Defender", L"Texture\\Dino\\DinoSprites - vita.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Striker", L"Texture\\Dino\\DinoSprites - vita.bmp");
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"GreenDinoIdle", m_pTex, Vec2(0.f, 150.f), Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"GreenDinoIdle", m_pTex, Vec2(0.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 3, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"GreenDinoIdle", true);
 }
 Striker::~Striker()

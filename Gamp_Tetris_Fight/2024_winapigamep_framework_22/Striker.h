@@ -15,6 +15,8 @@ protected:
 	bool CanUseSkill();
 	void UseSkill();
 private:
+	Texture* m_pTex;
+private:
 	int m_skillCount = 0;
 };
 

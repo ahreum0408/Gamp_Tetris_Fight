@@ -12,11 +12,9 @@
 //#include "Animation.h"
 #include "Striker.h"
 
-Player::Player()
-	: m_pTex(nullptr), m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)
+Player::Player() : m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)
 {
 	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 35,50 });
 	m_collider = GetComponent<Collider>();
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();

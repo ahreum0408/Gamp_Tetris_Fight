@@ -25,11 +25,9 @@ protected:
 	void UseSkill();
 protected:
 	//void CreateProjectile();
-	Texture* m_pTex;
 protected:
 	KEY_TYPE m_leftMoveKey;
 	KEY_TYPE m_rightMoveKey;
 	Collider* m_collider;
-
 };
 
