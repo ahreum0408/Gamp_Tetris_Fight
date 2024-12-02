@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Board.h"
 #include "ResourceManager.h"
+#include "PlayerManager.h"
 #include "EventManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
@@ -19,7 +20,8 @@
 
 Board::Board() :
     boardWidth(10), boardHeight(20), isSkill(false),
-    currentBlock(nullptr), nextBlock(BLOCK_TYPE::NONE)
+    currentBlock(nullptr), nextBlock(BLOCK_TYPE::NONE),
+    m_pTex(nullptr), nextBlockTex(nullptr)
 {
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
     boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
@@ -195,6 +197,9 @@ void Board::RemoveRow(int row)
         GET_SINGLE(EventManager)->DeleteObject(boardVec[row][col]);
         boardVec[row][col] = nullptr;
     }
+
+    if (++skillCnt == canSkillCnt)
+        GET_SINGLE(PlayerManager)->AddStrikerSkillCount();
 }
 
 void Board::MoveBlocksDown(int row) 
