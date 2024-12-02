@@ -4,7 +4,7 @@
 #include "FallState.h"
 
 void IdleState::Enter(Defender* player) {
-    std::cout << "Entering Idle State" << std::endl;
+    player->PlayIdleAnimation();
 }
 
 void IdleState::Update(Defender* player) {
@@ -17,5 +17,4 @@ void IdleState::Update(Defender* player) {
 }
 
 void IdleState::Exit(Defender* player) {
-    std::cout << "Exiting Idle State" << std::endl;
 }

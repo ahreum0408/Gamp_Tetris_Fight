@@ -8,10 +8,23 @@
 #include "IdleState.h"
 #include "JumpState.h"
 #include "FallState.h"
+#include "ResourceManager.h"
+#include "Animator.h"
 
 Defender::Defender(): m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(4), m_isGrounded(false){
-    m_stateMachine->ChangeState(new IdleState());
     m_collider->SetID(0);
+
+    m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Defender", L"Texture\\Dino\\DinoSprites - mort.bmp");
+
+    this->AddComponent<Animator>();
+    animator = GetComponent<Animator>();
+    animator->CreateAnimation(L"RedDinoIdle", m_pTex, Vec2(0.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 3, 0.1f);
+    animator->CreateAnimation(L"RedDinoJump", m_pTex, Vec2(336.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 1, 0.1f);
+    animator->CreateAnimation(L"RedDinoFall", m_pTex, Vec2(432.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 1, 0.1f);
+
+    //PlayIdleAnimation();
+
+    m_stateMachine->ChangeState(new IdleState());
 }
 
 bool Defender::CanUseSkill() // 패딩은 언제가 가능함
@@ -75,7 +88,7 @@ void Defender::ExitCollision(Collider* _other)
 }
 void Defender::Jump() {
     if (m_jumpCount < m_maxJumpCount) {
-         m_isGrounded = false;         // 점프 상태로 전환
+        m_isGrounded = false;         // 점프 상태로 전환
         m_jumpCount++;
 
         Vec2 vPos = GetPos();
@@ -87,7 +100,7 @@ void Defender::Jump() {
 bool Defender::IsGround(Collider* self, Collider* other)
 {
     wstring name = other->GetOwner()->GetName();
-    if (name == L"Wall") {
+    if (name == L"Wall" || name == L"Block") {
         return true;
     }
     return false;

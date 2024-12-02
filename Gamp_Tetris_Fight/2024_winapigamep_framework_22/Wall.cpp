@@ -5,7 +5,7 @@
 Wall::Wall()
 {
 	this->AddComponent<Collider>();
-	GetComponent<Collider>()->SetSize({ 500,50 });
+	
 }
 
 Wall::~Wall()
@@ -19,7 +19,6 @@ void Wall::Update()
 void Wall::Render(HDC _hdc)
 {	
 	ComponentRender(_hdc);
-
 }
 void Wall::EnterCollision(Collider* _other)
 {

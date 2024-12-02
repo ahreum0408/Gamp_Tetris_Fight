@@ -23,7 +23,7 @@ public:
 protected:
 	bool CanUseSkill();
 	void UseSkill();
-private:
+protected:
 	//void CreateProjectile();
 	Texture* m_pTex;
 protected:

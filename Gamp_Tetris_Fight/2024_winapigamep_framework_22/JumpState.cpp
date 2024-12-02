@@ -3,16 +3,18 @@
 #include "FallState.h"
 
 void JumpState::Enter(Defender* player) {
-    std::cout << "Entering Jump State" << std::endl;
+    player->PlayJumpAnimation();
     player->Jump(); // 점프 실행
 }
 
 void JumpState::Update(Defender* player) {
+    if (player->IsJumpKeyPressed()) {
+        player->Jump();
+    }
     if (player->IsFalling()) {
         player->GetStateMachine()->ChangeState(new FallState());
     }
 }
 
 void JumpState::Exit(Defender* player) {
-    std::cout << "Exiting Jump State" << std::endl;
 }
