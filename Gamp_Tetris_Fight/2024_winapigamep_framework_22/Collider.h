@@ -13,9 +13,6 @@ public:
     void EnterCollision(Collider* _other); // 충돌진입
     void StayCollision(Collider* _other); // 충돌중
     void ExitCollision(Collider* _other); // 충돌해제
-    void SetID(UINT id) {
-        m_ID = id;
-    }
     const UINT& GetID() const { return m_ID; }
 public:
     void SetSize(Vec2 _vSize) { m_vSize = _vSize; }

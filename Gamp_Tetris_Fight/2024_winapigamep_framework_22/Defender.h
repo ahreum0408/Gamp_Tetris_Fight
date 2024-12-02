@@ -28,7 +28,6 @@ public:
 	void PlayFallAnimation(){ animator->PlayAnimation(L"RedDinoFall", true); }
 private:
 	bool IsGround(Collider* other);
-	bool IsSideWall(Collider* other);
 	void SetJumpCount() { m_jumpCount = 0; }
 private:
 	enum class DefenderState {
@@ -41,7 +40,7 @@ private:
 	const int m_maxJumpCount;
 
 	bool m_isGrounded;
-	const float m_jumpPower = 300.f;
+	const float m_jumpPower = 350.f;
 	const float m_gravity = 980.f;
 	Vec2 m_vVelocity;
 

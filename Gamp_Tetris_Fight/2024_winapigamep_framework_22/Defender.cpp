@@ -12,7 +12,6 @@
 #include "Animator.h"
 
 Defender::Defender(): m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(4), m_isGrounded(false){
-    m_collider->SetID(0);
     m_collider->SetSize({ 35,40 });
     m_collider->SetOffSetPos({ 2,0 });
 
@@ -23,8 +22,6 @@ Defender::Defender(): m_stateMachine(new StateMachine<Defender>(this)), m_jumpCo
     animator->CreateAnimation(L"RedDinoIdle", m_pTex, Vec2(0.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 3, 0.1f);
     animator->CreateAnimation(L"RedDinoJump", m_pTex, Vec2(336.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 1, 0.1f);
     animator->CreateAnimation(L"RedDinoFall", m_pTex, Vec2(432.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 1, 0.1f);
-
-    //PlayIdleAnimation();
 
     m_stateMachine->ChangeState(new IdleState());
 }
@@ -41,11 +38,21 @@ void Defender::UseSkill()
 }
 
 void Defender::Update() {
-    Player::Update();
-    m_stateMachine->Update();
-
     Vec2 vPos = GetPos();
     m_beforePos = vPos;
+
+    if (GET_KEY(m_leftMoveKey)) {
+        vPos.x -= 100.f * fDT;
+    }
+    if (GET_KEY(m_rightMoveKey)) {
+        vPos.x += 100.f * fDT;
+    }
+    if (GET_KEYDOWN(KEY_TYPE::SPACE)) {
+        UseSkill();
+    }
+
+    Player::Update();
+    m_stateMachine->Update();
 
     // 중력 적용
     if (!m_isGrounded)
@@ -61,14 +68,10 @@ void Defender::Update() {
 
 void Defender::EnterCollision(Collider* _other)
 {
-    cout << "enter" << endl;
     if (IsGround(_other)) {
         m_isGrounded = true;
         m_vVelocity.y = 0; // 중력 가속도를 초기화
         SetJumpCount();
-    }
-    if (IsSideWall(_other)) {
-
     }
 }
 
@@ -101,15 +104,6 @@ bool Defender::IsGround(Collider* other)
 {
     wstring name = other->GetOwner()->GetName();
     if (name == L"BottomWall" || name == L"Block") {
-        return true;
-    }
-    return false;
-}
-
-bool Defender::IsSideWall(Collider* other)
-{
-    wstring name = other->GetOwner()->GetName();
-    if (name == L"SideWall") {
         return true;
     }
     return false;

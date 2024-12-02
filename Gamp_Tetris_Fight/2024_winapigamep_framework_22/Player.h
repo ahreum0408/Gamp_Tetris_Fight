@@ -24,10 +24,13 @@ protected:
 	bool CanUseSkill();
 	void UseSkill();
 protected:
-	//void CreateProjectile();
-protected:
 	KEY_TYPE m_leftMoveKey;
 	KEY_TYPE m_rightMoveKey;
 	Collider* m_collider;
+
+	const float minX = BOARD_POSX - BOARD_SIZEX / 2 - 100;
+	const float maxX = BOARD_POSX + BOARD_SIZEX / 2 - 50;
+	const float minY = BOARD_POSY - BOARD_SIZEY / 2 - 25;
+	const float maxY = BOARD_POSY + BOARD_SIZEY / 2 - 75;
 };
 

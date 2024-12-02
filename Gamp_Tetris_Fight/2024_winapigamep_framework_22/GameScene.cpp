@@ -18,40 +18,34 @@ void GameScene::Init()
 		board->SetSize({ 400.f, 800.f });
 		AddObject(board, LAYER::BACKGROUND);
 		board->CreateBlock();
-
-		m_boardPos = board->GetPos();
-		m_boardSize = board->GetSize();
 	}
     {
-        float leftEdge = m_boardPos.x - m_boardSize.x / 2;
-        float rightEdge = m_boardPos.x + m_boardSize.x / 2;
-        float bottomEdge = m_boardPos.y + m_boardSize.y / 2;
+        float leftEdge = BOARD_POSX - BOARD_SIZEX / 2;
+        float rightEdge = BOARD_POSX + BOARD_SIZEX / 2;
+        float bottomEdge = BOARD_POSY + BOARD_SIZEY / 2;
 
         // Left Wall
         Wall* leftWall = new Wall;
-        leftWall->SetPos({ leftEdge - 125, m_boardPos.y });
-        leftWall->SetSize({ 50, (int)m_boardSize.y });
+		leftWall->SetPos({ (int)leftEdge - 125, BOARD_POSY });
+		leftWall->SetSize({ 50, BOARD_SIZEY });
 		leftWall->SetWallSize(leftWall->GetSize());
 		leftWall->SetName(L"SideWall");
-		leftWall->SetID(11);
         AddObject(leftWall, LAYER::Wall);
 
         // Right Wall
         Wall* rightWall = new Wall;
-        rightWall->SetPos({ rightEdge + -75, m_boardPos.y });
-        rightWall->SetSize({ 50, (int)m_boardSize.y });
+        rightWall->SetPos({ (int)rightEdge -75, BOARD_POSY });
+        rightWall->SetSize({ 50, BOARD_SIZEY });
 		rightWall->SetWallSize(rightWall->GetSize());
 		rightWall->SetName(L"SideWall");
-		rightWall->SetID(12);
         AddObject(rightWall, LAYER::Wall);
 
         // Bottom Wall
         Wall* bottomWall = new Wall;
-        bottomWall->SetPos({ m_boardPos.x - 100, bottomEdge + 25 });
-        bottomWall->SetSize({ (int)m_boardSize.x, 50 });
+        bottomWall->SetPos({ BOARD_POSX - 100, (int)bottomEdge + 25 });
+        bottomWall->SetSize({ BOARD_SIZEX, 50 });
 		bottomWall->SetWallSize(bottomWall->GetSize());
 		bottomWall->SetName(L"BottomWall");
-		bottomWall->SetID(13);
         AddObject(bottomWall, LAYER::Wall);
     }
 	{

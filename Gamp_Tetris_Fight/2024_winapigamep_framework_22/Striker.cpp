@@ -8,8 +8,8 @@
 
 Striker::Striker() {
 	this->AddComponent<CameraComponent>();
-	m_collider->SetID(1);
 	m_collider->SetSize({ 35,40 });
+	m_collider->SetOffSetPos({ 2, 0 });
 
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Striker", L"Texture\\Dino\\DinoSprites - vita.bmp");
 	AddComponent<Animator>();
@@ -32,8 +32,14 @@ void Striker::UseSkill()
 	}
 }
 void Striker::Update() {
-	Player::Update();
+	Vec2 vPos = GetPos();
 
+	if (GET_KEYDOWN(m_leftMoveKey)) {
+		vPos.x -= 48.f;
+	}
+	if (GET_KEYDOWN(m_rightMoveKey)) {
+		vPos.x += 48.f;
+	}
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT)) { // ¾Æ·¡·Î Âï±â
 		CameraComponent* cam = GetComponent<CameraComponent>();
 		if (cam != nullptr) {
@@ -41,4 +47,6 @@ void Striker::Update() {
 		}
 		UseSkill();
 	}
+
+	Player::Update();
 }

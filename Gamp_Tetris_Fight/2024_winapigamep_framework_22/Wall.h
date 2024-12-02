@@ -15,9 +15,6 @@ public:
 	virtual void StayCollision(Collider* _other) override;
 	virtual void ExitCollision(Collider* _other) override;
 
-	void SetID(int id) {
-		GetComponent<Collider>()->SetID(id);
-	}
 	void SetWallSize(Vec2 size) { GetComponent<Collider>()->SetSize(size); }
 };
 

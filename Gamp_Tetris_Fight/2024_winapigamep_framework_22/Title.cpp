@@ -68,50 +68,50 @@ void Title::Update()
 
 void Title::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		m_pTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+	//Vec2 vPos = GetPos();
+	//Vec2 vSize = GetSize();
+	//int width = m_pTex->GetWidth();
+	//int height = m_pTex->GetHeight();
+	//::TransparentBlt(_hdc
+	//	, (int)(vPos.x - width / 2)
+	//	, (int)(vPos.y - height / 2)
+	//	, width, height,
+	//	m_pTex->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 
-	// Start
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = startTextTex->GetWidth();
-	int height = startTextTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		startTextTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+	//// Start
+	//Vec2 vPos = GetPos();
+	//Vec2 vSize = GetSize();
+	//int width = startTextTex->GetWidth();
+	//int height = startTextTex->GetHeight();
+	//::TransparentBlt(_hdc
+	//	, (int)(vPos.x - width / 2)
+	//	, (int)(vPos.y - height / 2)
+	//	, width, height,
+	//	startTextTex->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 
-	// GameRule
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = gameruleTextTex->GetWidth();
-	int height = gameruleTextTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		gameruleTextTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+	//// GameRule
+	//Vec2 vPos = GetPos();
+	//Vec2 vSize = GetSize();
+	//int width = gameruleTextTex->GetWidth();
+	//int height = gameruleTextTex->GetHeight();
+	//::TransparentBlt(_hdc
+	//	, (int)(vPos.x - width / 2)
+	//	, (int)(vPos.y - height / 2)
+	//	, width, height,
+	//	gameruleTextTex->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 
-	// Exit
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = exitTextTex->GetWidth();
-	int height = exitTextTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
-		, width, height,
-		exitTextTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+	//// Exit
+	//Vec2 vPos = GetPos();
+	//Vec2 vSize = GetSize();
+	//int width = exitTextTex->GetWidth();
+	//int height = exitTextTex->GetHeight();
+	//::TransparentBlt(_hdc
+	//	, (int)(vPos.x - width / 2)
+	//	, (int)(vPos.y - height / 2)
+	//	, width, height,
+	//	exitTextTex->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 }

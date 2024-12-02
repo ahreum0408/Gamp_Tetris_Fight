@@ -70,7 +70,7 @@ void Board::Update()
         if (!isSkill)
         {
             // 위쪽 화살표 키를 눌러 블록 회전
-            if (GET_KEYDOWN(KEY_TYPE::UP))
+            if (GET_KEYDOWN(KEY_TYPE::W))
             {
                 currentBlock->Rotate();
                 if (false == CheckClampRotat(currentBlock))
@@ -87,7 +87,7 @@ void Board::Update()
             }
 
             // 양옆 화살표 키를 눌러 블록 이동
-            if (GET_KEYDOWN(KEY_TYPE::LEFT))
+            if (GET_KEYDOWN(KEY_TYPE::A))
             {
                 currentBlock->MoveSide(true);
                 if (CheckClampLeft(currentBlock->GetBlocks()))
@@ -96,7 +96,7 @@ void Board::Update()
                 // 놓일 지점 보이기
                 //SetGhostBlock();
             }
-            if (GET_KEYDOWN(KEY_TYPE::RIGHT))
+            if (GET_KEYDOWN(KEY_TYPE::D))
             {
                 currentBlock->MoveSide(false);
                 if (CheckClampRight(currentBlock->GetBlocks()))
@@ -108,7 +108,7 @@ void Board::Update()
             
         }
 
-        if (GET_KEYDOWN(KEY_TYPE::SPACE))
+        if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
         {
             isSkill = true;
             currentMoveDownDelay = 0;

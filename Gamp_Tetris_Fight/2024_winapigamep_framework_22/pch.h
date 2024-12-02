@@ -37,6 +37,10 @@ using std::wstring;
 #define SCREEN_WIDTH  1000
 #define SCREEN_HEIGHT 800
 #define BLOCK_SIZE 40
+#define BOARD_POSX 600
+#define BOARD_POSY 200
+#define BOARD_SIZEX 400
+#define BOARD_SIZEY 800
 
 // 디버깅용 콘솔창
 #ifdef _DEBUG
