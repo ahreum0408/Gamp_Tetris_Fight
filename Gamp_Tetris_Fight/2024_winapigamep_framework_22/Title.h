@@ -10,23 +10,16 @@ public:
 
 	void Update() override;
 	void Render(HDC _hdc) override;
-
+public:
+	int curIndex;
+	bool isGameRuleOn;
 private:
+	int index;
+
 	Texture* m_pTex;
 	Texture* startTextTex;
 	Texture* gameruleTextTex;
 	Texture* exitTextTex;
-
-	int index;
-	int curIndex;
-
-	POINT mousePos;
-	RECT startRect;
-	RECT gameruleRect;
-	RECT exitRect;
-
-	// Game Rule
-	bool isGameRuleOn = false;
 	Texture* gameRuleTex;
 };
 
