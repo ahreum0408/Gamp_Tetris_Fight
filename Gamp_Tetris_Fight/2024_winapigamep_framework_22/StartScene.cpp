@@ -55,15 +55,18 @@ void StartScene::Update()
 	else if (isGameRuleOn && GET_KEYDOWN(KEY_TYPE::ESC))
 		isGameRuleOn = false;
 
-	if (isGameRuleOn)
+	if (title != nullptr && PopUp != nullptr)
 	{
-		title->isGameRuleOn = true;
-		PopUp->RulePopUp = true;
-	}
-	else
-	{
-		title->isGameRuleOn = false;
-		PopUp->RulePopUp = false;
+		if (isGameRuleOn)
+		{
+			title->isGameRuleOn = true;
+			PopUp->RulePopUp = true;
+		}
+		else
+		{
+			title->isGameRuleOn = false;
+			PopUp->RulePopUp = false;
+		}
 	}
 }
 
