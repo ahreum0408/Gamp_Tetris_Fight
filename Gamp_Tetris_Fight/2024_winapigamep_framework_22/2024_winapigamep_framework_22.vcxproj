@@ -169,7 +169,6 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Block.h" />
-    <ClInclude Include="Block_Ghost.h" />
     <ClInclude Include="Block_I.h" />
     <ClInclude Include="Block_J.h" />
     <ClInclude Include="Block_L.h" />
@@ -191,6 +190,9 @@
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FallState.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="GameRule.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="IdleState.h" />
@@ -223,7 +225,6 @@
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Block.cpp" />
-    <ClCompile Include="Block_Ghost.cpp" />
     <ClCompile Include="Block_I.cpp" />
     <ClCompile Include="Block_J.cpp" />
     <ClCompile Include="Block_L.cpp" />
@@ -242,6 +243,9 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FallState.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="GameRule.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="IdleState.cpp" />

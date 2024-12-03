@@ -4,6 +4,7 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "StartScene.h"
+#include "GameOverScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -12,10 +13,12 @@ void SceneManager::Init()
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 	RegisterScene(L"StartScene",std::make_shared<StartScene>());
+	RegisterScene(L"GameOverScene",std::make_shared<GameOverScene>());
 
 	// ¾À ·Îµå
 	//LoadScene(L"GameScene");
-	LoadScene(L"StartScene");
+	//LoadScene(L"StartScene");
+	LoadScene(L"GameOverScene");
 }
 
 void SceneManager::Update()

@@ -56,6 +56,9 @@
     <Filter Include="Engine\03. Object\Player\Defender\State">
       <UniqueIdentifier>{b173b28c-1f92-49ca-859c-7bec25f3fedd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Scene">
+      <UniqueIdentifier>{decc67a1-119a-4b03-9fe6-53e0428cd9b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -175,9 +178,6 @@
     <ClInclude Include="Block_Z.h">
       <Filter>Engine\03. Object\BlockBase\Blocks</Filter>
     </ClInclude>
-    <ClInclude Include="Block_Ghost.h">
-      <Filter>Engine\03. Object\BlockBase\Blocks</Filter>
-    </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
@@ -215,7 +215,16 @@
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>Engine\03. Object</Filter>
+      <Filter>Engine\03. Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRule.h">
+      <Filter>Engine\03. Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Engine\03. Object\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,9 +337,6 @@
     <ClCompile Include="Block_Z.cpp">
       <Filter>Engine\03. Object\BlockBase\Blocks</Filter>
     </ClCompile>
-    <ClCompile Include="Block_Ghost.cpp">
-      <Filter>Engine\03. Object\BlockBase\Blocks</Filter>
-    </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
@@ -368,7 +374,16 @@
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
-      <Filter>Engine\03. Object</Filter>
+      <Filter>Engine\03. Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameRule.cpp">
+      <Filter>Engine\03. Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Engine\03. Object\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -16,7 +16,6 @@
 #include "Block_S.h"
 #include "Block_T.h"
 #include "Block_Z.h"
-#include "Block_Ghost.h"
 #include "Camera.h"
 
 Board::Board() :
@@ -72,7 +71,7 @@ void Board::Update()
     {
         if (!isSkill)
         {
-            // 위쪽 화살표 키를 눌러 블록 회전
+            // W 키를 눌러 블록 회전
             if (GET_KEYDOWN(KEY_TYPE::W))
             {
                 currentBlock->Rotate();
@@ -82,35 +81,25 @@ void Board::Update()
                     currentBlock->Rotate();
                     currentBlock->Rotate();
                 }
-                else
-                {
-                    // 놓일 지점 보이기
-                    //SetGhostBlock();
-                }
             }
 
-            // 양옆 화살표 키를 눌러 블록 이동
+            // A, D 키를 눌러 블록 이동
             if (GET_KEYDOWN(KEY_TYPE::A))
             {
                 currentBlock->MoveSide(true);
                 if (CheckClampLeft(currentBlock->GetBlocks()))
                     currentBlock->MoveSide(false);
-
-                // 놓일 지점 보이기
-                //SetGhostBlock();
             }
             if (GET_KEYDOWN(KEY_TYPE::D))
             {
                 currentBlock->MoveSide(false);
                 if (CheckClampRight(currentBlock->GetBlocks()))
                     currentBlock->MoveSide(true);
-
-                // 놓일 지점 보이기
-                //SetGhostBlock();
             }
 
         }
 
+        // LSHIFT 키를 눌러 블록 쾅 찍기
         if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
         {
             isSkill = true;
@@ -309,7 +298,7 @@ bool Board::ThereIsBlock(const Block* block, int X, int Y) const
     float y = block->GetPos().y - boardOrigin.y;
 
     int row = y / BLOCK_SIZE + Y;
-    int col = x / BLOCK_SIZE + X;  // 한칸 오른쪽 검사
+    int col = x / BLOCK_SIZE + X;
 
     if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
     {
@@ -362,8 +351,8 @@ void Board::CreateBlock()
     float boardStartY = GetPos().y - (boardHeight * BLOCK_SIZE) / 2;
 
     // 블록을 보드의 -1번째 줄에 배치
-    float blockStartX = GetPos().x - BLOCK_SIZE * 3;
-    float blockStartY = boardStartY + BLOCK_SIZE * 2;
+    float blockStartX = GetPos().x - BLOCK_SIZE * 2;
+    float blockStartY = boardStartY + BLOCK_SIZE * 4;
 
     block->SetPos({ blockStartX, blockStartY - BLOCK_SIZE / 2 });
     currentBlock = block;
@@ -411,30 +400,4 @@ void Board::CreateBlock()
         break;
     }
     block->SetBlockPosition();
-
-    // 고스트 블럭 세팅
-    //ghostBlock->SyncWithCurrentBlock(currentBlock);
-    //SetGhostBlock();
-}
-
-void Board::SetGhostBlock()
-{
-    if (currentBlock == nullptr) return;
-
-    // 고스트 블록의 초기 위치를 currentBlock과 동일하게 설정
-    ghostBlock->SyncWithCurrentBlock(currentBlock);
-
-    // 고스트 블록을 아래로 이동하면서 충돌 여부 확인
-    while (!CheckFloor(ghostBlock->GetBlocks()))
-    {
-        ghostBlock->SetPos({ ghostBlock->GetPos().x,
-            ghostBlock->GetPos().y + BLOCK_SIZE });
-        for (Block* block : ghostBlock->GetBlocks())
-        {
-            Vec2 pos = block->GetPos();
-            pos.y += BLOCK_SIZE;
-            block->SetPos(pos);
-        }
-    }
-
 }

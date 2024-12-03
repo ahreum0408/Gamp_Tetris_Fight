@@ -1,0 +1,88 @@
+#include "pch.h"
+#include "GameOver.h"
+#include "ResourceManager.h"
+#include "InputManager.h"
+
+GameOver::GameOver() :
+	m_pTex(nullptr), retryTextTex(nullptr), exitTextTex(nullptr)
+{
+	// 둘 중 누가 이겼는지 확인해서 바꿔주기
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
+
+	retryTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RetryTextOff", L"Texture\\GameOverScene\\RetryTextOff.bmp");
+	exitTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"ExitTextOff", L"Texture\\StartScene\\ExitTextOff.bmp");
+}
+
+GameOver::~GameOver()
+{
+}
+
+void GameOver::Update()
+{
+	if (GET_KEYDOWN(KEY_TYPE::DOWN) || GET_KEYDOWN(KEY_TYPE::S))
+		if (index < 1) index += 1;
+
+	if (GET_KEYDOWN(KEY_TYPE::UP) || GET_KEYDOWN(KEY_TYPE::W))
+		if (index > 0) index -= 1;
+
+	if (index != curIndex)
+		switch (index)
+		{
+		case 0:
+			curIndex = 0;
+			retryTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RetryTextOn", L"Texture\\GameOverScene\\RetryTextOn.bmp");
+			exitTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"ExitTextOff", L"Texture\\StartScene\\ExitTextOff.bmp");
+			break;
+		case 1:
+			curIndex = 1;
+			retryTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RetryTextOff", L"Texture\\GameOverScene\\RetryTextOff.bmp");
+			exitTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"ExitTextOn", L"Texture\\StartScene\\ExitTextOn.bmp");
+			break;
+		default:
+			break;
+		}
+}
+
+void GameOver::Render(HDC _hdc)
+{
+	{
+		Vec2 vPos = GetPos();
+		Vec2 vSize = GetSize();
+		int width = m_pTex->GetWidth();
+		int height = m_pTex->GetHeight();
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width, height,
+			m_pTex->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255));
+	}
+
+	{
+		// Retry
+		Vec2 vPos = { SCREEN_WIDTH / 4, 500 };
+		Vec2 vSize = { 100, 250 };
+		int width = retryTextTex->GetWidth();
+		int height = retryTextTex->GetHeight();
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width, height,
+			retryTextTex->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255));
+	}
+
+	{
+		// Exit
+		Vec2 vPos = { SCREEN_WIDTH / 4, 600 };
+		Vec2 vSize = { 100, 250 };
+		int width = exitTextTex->GetWidth();
+		int height = exitTextTex->GetHeight();
+		::TransparentBlt(_hdc
+			, (int)(vPos.x - width / 2)
+			, (int)(vPos.y - height / 2)
+			, width, height,
+			exitTextTex->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255));
+	}
+}
