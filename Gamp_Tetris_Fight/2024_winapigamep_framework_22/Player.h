@@ -28,9 +28,8 @@ protected:
 	KEY_TYPE m_rightMoveKey;
 	Collider* m_collider;
 
-	const float minX = BOARD_POSX - BOARD_SIZEX / 2 - 100;
-	const float maxX = BOARD_POSX + BOARD_SIZEX / 2 - 50;
-	const float minY = BOARD_POSY - BOARD_SIZEY / 2 - 25;
-	const float maxY = BOARD_POSY + BOARD_SIZEY / 2 - 75;
+	// 플레이어 크기 만큼 더 조절
+	const float minX = 300 + 24;
+	const float maxX = 700 - 24;
 };
 

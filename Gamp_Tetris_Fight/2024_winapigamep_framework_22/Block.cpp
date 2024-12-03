@@ -12,6 +12,7 @@ Block::Block(wstring path) :
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(std::format(L"{}Block", path), path);
 	this->AddComponent<Collider>();
 	GetComponent<Collider>()->SetSize({ BLOCK_SIZE, BLOCK_SIZE });
+	SetName(L"Block");
 }
 Block::~Block() {}
 

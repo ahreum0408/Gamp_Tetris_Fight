@@ -35,18 +35,20 @@ void Striker::Update() {
 	Vec2 vPos = GetPos();
 
 	if (GET_KEYDOWN(m_leftMoveKey)) {
-		vPos.x -= 48.f;
+		vPos.x -= 40.f;
 	}
 	if (GET_KEYDOWN(m_rightMoveKey)) {
-		vPos.x += 48.f;
+		vPos.x += 40.f;
 	}
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT)) { // ¾Æ·¡·Î Âï±â
 		CameraComponent* cam = GetComponent<CameraComponent>();
 		if (cam != nullptr) {
+			cout << "shake camera" << endl;
 			cam->ShakeCamera();
 		}
 		UseSkill();
 	}
 
+	SetPos(vPos);
 	Player::Update();
 }

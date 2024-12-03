@@ -48,7 +48,7 @@ void Board::Render(HDC _hdc)
     // NextBlock
     Vec2 boardOrigin = GetBoardOrigin();
     vPos = { boardOrigin.x + boardWidth * BLOCK_SIZE + 100.f,
-    boardOrigin .y + 80.f };
+    boardOrigin.y + 80.f };
     vSize = { 120.f,80.f };
     width = nextBlockTex->GetWidth();
     height = nextBlockTex->GetHeight();
@@ -105,7 +105,7 @@ void Board::Update()
                 // 놓일 지점 보이기
                 //SetGhostBlock();
             }
-            
+
         }
 
         if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
@@ -168,11 +168,11 @@ void Board::BuildBlock(Block_Parent* blockParent)
     }
 }
 
-void Board::ClearFullRows() 
+void Board::ClearFullRows()
 {
     for (int row = 0; row < boardHeight; ++row)
     {
-        if (IsRowFull(row)) 
+        if (IsRowFull(row))
         {
             RemoveRow(row);
             MoveBlocksDown(row);
@@ -180,9 +180,9 @@ void Board::ClearFullRows()
     }
 }
 
-bool Board::IsRowFull(int row) const 
+bool Board::IsRowFull(int row) const
 {
-    for (int col = 0; col < boardWidth; ++col) 
+    for (int col = 0; col < boardWidth; ++col)
     {
         if (boardVec[row][col] == nullptr)
             return false;
@@ -192,7 +192,7 @@ bool Board::IsRowFull(int row) const
 
 void Board::RemoveRow(int row)
 {
-    for (int col = 0; col < boardWidth; ++col) 
+    for (int col = 0; col < boardWidth; ++col)
     {
         GET_SINGLE(EventManager)->DeleteObject(boardVec[row][col]);
         boardVec[row][col] = nullptr;
@@ -202,11 +202,11 @@ void Board::RemoveRow(int row)
         GET_SINGLE(PlayerManager)->AddStrikerSkillCount();
 }
 
-void Board::MoveBlocksDown(int row) 
+void Board::MoveBlocksDown(int row)
 {
-    for (int r = row; r > 0; --r) 
+    for (int r = row; r > 0; --r)
     {
-        for (int col = 0; col < boardWidth; ++col) 
+        for (int col = 0; col < boardWidth; ++col)
         {
             boardVec[r][col] = boardVec[r - 1][col];
             if (boardVec[r][col])
@@ -244,7 +244,7 @@ bool Board::CheckClampRotat(Block_Parent* block)
     for (const Block* block : block->GetBlocks())
     {
         float x = block->GetPos().x;
-        if (x - BLOCK_SIZE / 2 < GetBoardOrigin().x || 
+        if (x - BLOCK_SIZE / 2 < GetBoardOrigin().x ||
             ThereIsBlock(block))
         {
             if (ThereIsBlock(block, 1))
@@ -364,7 +364,7 @@ void Board::CreateBlock()
 
     block->SetPos({ blockStartX, blockStartY - BLOCK_SIZE / 2 });
     currentBlock = block;
-    currentBlock->SetName(L"Block");
+    block->SetName(L"Block");
     GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(block, LAYER::BLOCK);
 
     // 다음 블럭 지정

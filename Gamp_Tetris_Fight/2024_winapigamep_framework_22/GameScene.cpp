@@ -10,48 +10,47 @@
 
 void GameScene::Init()
 {
-	
+
 	{
 		Board* board = new Board;
-		board->SetPos({ SCREEN_WIDTH / 2 + 100,
-				SCREEN_HEIGHT / 2 - 200});
+		board->SetPos({ SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2 });
 		board->SetSize({ 400.f, 800.f });
 		AddObject(board, LAYER::BACKGROUND);
 		board->CreateBlock();
 	}
-    {
-        float leftEdge = BOARD_POSX - BOARD_SIZEX / 2;
-        float rightEdge = BOARD_POSX + BOARD_SIZEX / 2;
-        float bottomEdge = BOARD_POSY + BOARD_SIZEY / 2;
+	{
+		float leftEdge = BOARD_POSX - BOARD_SIZEX / 2;
+		float rightEdge = BOARD_POSX + BOARD_SIZEX / 2;
+		float bottomEdge = BOARD_POSY + BOARD_SIZEY / 2;
 
-        // Left Wall
-        Wall* leftWall = new Wall;
-		leftWall->SetPos({ (int)leftEdge - 125, BOARD_POSY });
+		// Left Wall
+		Wall* leftWall = new Wall;
+		leftWall->SetPos({ (int)leftEdge - 125, BOARD_POSY * 2 });
 		leftWall->SetSize({ 50, BOARD_SIZEY });
 		leftWall->SetWallSize(leftWall->GetSize());
 		leftWall->SetName(L"SideWall");
-        AddObject(leftWall, LAYER::Wall);
+		AddObject(leftWall, LAYER::Wall);
 
-        // Right Wall
-        Wall* rightWall = new Wall;
-        rightWall->SetPos({ (int)rightEdge -75, BOARD_POSY });
-        rightWall->SetSize({ 50, BOARD_SIZEY });
+		// Right Wall
+		Wall* rightWall = new Wall;
+		rightWall->SetPos({ (int)rightEdge - 75, BOARD_POSY * 2 });
+		rightWall->SetSize({ 50, BOARD_SIZEY });
 		rightWall->SetWallSize(rightWall->GetSize());
 		rightWall->SetName(L"SideWall");
-        AddObject(rightWall, LAYER::Wall);
+		AddObject(rightWall, LAYER::Wall);
 
-        // Bottom Wall
-        Wall* bottomWall = new Wall;
-        bottomWall->SetPos({ BOARD_POSX - 100, (int)bottomEdge + 25 });
-        bottomWall->SetSize({ BOARD_SIZEX, 50 });
+		// Bottom Wall
+		Wall* bottomWall = new Wall;
+		bottomWall->SetPos({ BOARD_POSX - 100, (int)bottomEdge + 225 });
+		bottomWall->SetSize({ BOARD_SIZEX, 50 });
 		bottomWall->SetWallSize(bottomWall->GetSize());
 		bottomWall->SetName(L"BottomWall");
-        AddObject(bottomWall, LAYER::Wall);
-    }
+		AddObject(bottomWall, LAYER::Wall);
+	}
 	{
 		Object* oPlayer1 = new Striker;
 
-		oPlayer1->SetPos({ SCREEN_WIDTH / 2.f,300.f });
+		oPlayer1->SetPos({ 520.f, 60.f });
 		oPlayer1->SetSize({ 100.f,100.f });
 
 		Player* pPlayer1 = dynamic_cast<Player*>(oPlayer1);
@@ -62,7 +61,7 @@ void GameScene::Init()
 	}
 	{
 		Object* oPlayer2 = new Defender;
-		oPlayer2->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
+		oPlayer2->SetPos({ 520.f, 700.f });
 		oPlayer2->SetSize({ 100.f,100.f });
 
 		Player* pPlayer2 = static_cast<Player*>(oPlayer2);

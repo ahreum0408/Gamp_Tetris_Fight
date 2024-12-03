@@ -14,15 +14,13 @@ Player::Player() : m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)
 }
 Player::~Player()
 {
-	//if (nullptr != m_pTex)
-	//	delete m_pTex;
+
 }
 void Player::Update()
 {
 	Vec2 vPos = GetPos();
 
 	vPos.x = std::clamp(vPos.x, minX, maxX);
-	vPos.y = std::clamp(vPos.y, minY, maxY);
 
 	SetPos(vPos);
 }
@@ -34,7 +32,7 @@ void Player::Render(HDC _hdc)
 
 void Player::EnterCollision(Collider* _other)
 {
-	
+
 }
 
 void Player::StayCollision(Collider* _other)

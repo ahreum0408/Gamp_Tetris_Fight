@@ -11,7 +11,7 @@
 #include "ResourceManager.h"
 #include "Animator.h"
 
-Defender::Defender(): m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(4), m_isGrounded(false){
+Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(4), m_isGrounded(false) {
     m_collider->SetSize({ 35,40 });
     m_collider->SetOffSetPos({ 2,0 });
 
@@ -28,13 +28,13 @@ Defender::Defender(): m_stateMachine(new StateMachine<Defender>(this)), m_jumpCo
 
 bool Defender::CanUseSkill() // 패딩은 언제가 가능함
 {
-	return true;
+    return true;
 }
 void Defender::UseSkill()
 {
-	if (CanUseSkill()) {
-		cout << "defender use skill" << endl;
-	}
+    if (CanUseSkill()) {
+        cout << "defender use skill" << endl;
+    }
 }
 
 void Defender::Update() {
@@ -51,7 +51,6 @@ void Defender::Update() {
         UseSkill();
     }
 
-    Player::Update();
     m_stateMachine->Update();
 
     // 중력 적용
@@ -64,6 +63,7 @@ void Defender::Update() {
     vPos.y += m_vVelocity.y * fDT;
 
     SetPos(vPos);
+    Player::Update();
 }
 
 void Defender::EnterCollision(Collider* _other)
@@ -77,10 +77,6 @@ void Defender::EnterCollision(Collider* _other)
 
 void Defender::StayCollision(Collider* _other)
 {
-    if (IsGround(_other)) {
-        //cout << "stay" << endl;
-        m_isGrounded = true;
-    }
 }
 
 void Defender::ExitCollision(Collider* _other)

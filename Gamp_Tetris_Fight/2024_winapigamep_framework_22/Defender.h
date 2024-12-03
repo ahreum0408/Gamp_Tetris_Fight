@@ -23,9 +23,9 @@ public:
 	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::UP); }
 	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
 public:
-	void PlayIdleAnimation(){ animator->PlayAnimation(L"RedDinoIdle", true); }
-	void PlayJumpAnimation(){ animator->PlayAnimation(L"RedDinoJump", true); }
-	void PlayFallAnimation(){ animator->PlayAnimation(L"RedDinoFall", true); }
+	void PlayIdleAnimation() { animator->PlayAnimation(L"RedDinoIdle", true); }
+	void PlayJumpAnimation() { animator->PlayAnimation(L"RedDinoJump", true); }
+	void PlayFallAnimation() { animator->PlayAnimation(L"RedDinoFall", true); }
 private:
 	bool IsGround(Collider* other);
 	void SetJumpCount() { m_jumpCount = 0; }
