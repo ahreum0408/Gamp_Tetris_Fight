@@ -17,6 +17,7 @@
 #include "Block_T.h"
 #include "Block_Z.h"
 #include "Block_Ghost.h"
+#include "Camera.h"
 
 Board::Board() :
     boardWidth(10), boardHeight(20), isSkill(false),
@@ -36,11 +37,13 @@ void Board::Render(HDC _hdc)
     // Board
     Vec2 vPos = GetPos();
     Vec2 vSize = GetSize();
+    Vec2 camerapos = GET_SINGLE(Camera)->GetCameraPos();
     int width = m_pTex->GetWidth();
     int height = m_pTex->GetHeight();
+
     ::TransparentBlt(_hdc
-        , (int)(vPos.x - width / 2)
-        , (int)(vPos.y - height / 2)
+        , (int)(vPos.x - width / 2 - ((int)camerapos.x))
+        , (int)(vPos.y - height / 2 - ((int)camerapos.y))
         , width, height,
         m_pTex->GetTexDC()
         , 0, 0, width, height, RGB(255, 0, 255));
@@ -53,8 +56,8 @@ void Board::Render(HDC _hdc)
     width = nextBlockTex->GetWidth();
     height = nextBlockTex->GetHeight();
     ::TransparentBlt(_hdc
-        , (int)(vPos.x - width / 2)
-        , (int)(vPos.y - height / 2)
+        , (int)(vPos.x - width / 2 - ((int)camerapos.x))
+        , (int)(vPos.y - height / 2 - ((int)camerapos.y))
         , width, height,
         nextBlockTex->GetTexDC()
         , 0, 0, width, height, RGB(255, 0, 255));

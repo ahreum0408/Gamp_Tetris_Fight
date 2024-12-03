@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "Collider.h"
 #include <format>
+#include "Camera.h"
 
 Block::Block(wstring path) :
 	m_vDir(1.f, 1.f),
@@ -20,12 +21,14 @@ void Block::Render(HDC _hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
+	Vec2 camerapos = GET_SINGLE(Camera)->GetCameraPos();
 
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
+
 	::TransparentBlt(_hdc
-		, (int)(vPos.x - width / 2)
-		, (int)(vPos.y - height / 2)
+		, (int)(vPos.x - width / 2 - ((int)camerapos.x))
+		, (int)(vPos.y - height / 2 - ((int)camerapos.y))
 		, width, height,
 		m_pTex->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
