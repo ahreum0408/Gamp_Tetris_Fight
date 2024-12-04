@@ -5,9 +5,6 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 
-Title* title;
-GameRule* PopUp;
-
 void StartScene::Init()
 {
 	if (title == nullptr)

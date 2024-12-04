@@ -4,9 +4,10 @@
 #include "InputManager.h"
 
 GameOver::GameOver() :
-	m_pTex(nullptr), retryTextTex(nullptr), exitTextTex(nullptr)
+	m_pTex(nullptr), retryTextTex(nullptr), exitTextTex(nullptr),
+	curIndex(1)
 {
-	// 둘 중 누가 이겼는지 확인해서 바꿔주기
+	// 둘 중 누가 이겼는지 빨간 디노인지
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
 
 	retryTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RetryTextOff", L"Texture\\GameOverScene\\RetryTextOff.bmp");

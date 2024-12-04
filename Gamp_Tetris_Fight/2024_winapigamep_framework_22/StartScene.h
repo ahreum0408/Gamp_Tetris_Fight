@@ -1,5 +1,7 @@
 #pragma once
 #include "Scene.h"
+#include "GameRule.h"
+#include "Title.h"
 class StartScene :
     public Scene
 {
@@ -8,5 +10,8 @@ class StartScene :
     virtual void Release() override;
 public:
     bool isGameRuleOn = false;
+private:
+    Title* title;
+    GameRule* PopUp;
 };
 
