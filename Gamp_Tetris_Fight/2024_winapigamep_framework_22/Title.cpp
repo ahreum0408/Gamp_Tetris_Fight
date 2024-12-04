@@ -6,12 +6,11 @@
 #include "Core.h"
 
 Title::Title() :
-	m_pTex(nullptr), gameRuleTex(nullptr), startTextTex(nullptr), gameruleTextTex(nullptr), exitTextTex(nullptr),
+	m_pTex(nullptr), startTextTex(nullptr), gameruleTextTex(nullptr), exitTextTex(nullptr),
 	index(0), curIndex(0),
 	isGameRuleOn(false)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\StartScene\\StartScene.bmp");
-	//gameRuleTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GameRule", L"Texture\\StartScene\\gamp-background.bmp");
 
 	startTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"StartTextOff", L"Texture\\StartScene\\StartTextOff.bmp");
 	gameruleTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GameRuleTextOff", L"Texture\\StartScene\\GameRuleTextOff.bmp");

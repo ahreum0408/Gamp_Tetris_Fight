@@ -20,6 +20,5 @@ private:
 	Texture* startTextTex;
 	Texture* gameruleTextTex;
 	Texture* exitTextTex;
-	Texture* gameRuleTex;
 };
 

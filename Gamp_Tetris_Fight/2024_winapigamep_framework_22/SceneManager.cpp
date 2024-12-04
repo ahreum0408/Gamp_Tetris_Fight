@@ -17,8 +17,8 @@ void SceneManager::Init()
 
 	// ¾À ·Îµå
 	//LoadScene(L"GameScene");
-	//LoadScene(L"StartScene");
-	LoadScene(L"GameOverScene");
+	LoadScene(L"StartScene");
+	//LoadScene(L"GameOverScene");
 }
 
 void SceneManager::Update()

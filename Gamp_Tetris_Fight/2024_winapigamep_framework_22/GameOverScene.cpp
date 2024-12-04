@@ -4,8 +4,6 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 
-GameOver* gameOver;
-
 void GameOverScene::Init()
 {
 	if (gameOver == nullptr)

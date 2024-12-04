@@ -32,8 +32,8 @@ private:
 
     // Block Down
     int moveDownTimer = 0;
-    int currentMoveDownDelay = 200;
-    const int moveDownDelay = 200;
+    int currentMoveDownDelay = 100;
+    const int moveDownDelay = 100;
 
     // Skill
     bool isSkill = false;
