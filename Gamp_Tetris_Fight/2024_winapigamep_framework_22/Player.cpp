@@ -6,11 +6,17 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Striker.h"
+#include "Velocity.h"
 
 Player::Player() : m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)
 {
 	this->AddComponent<Collider>();
-	m_collider = GetComponent<Collider>();
+	m_pCollider = GetComponent<Collider>();
+
+	this->AddComponent<Animator>();
+	m_animator = GetComponent<Animator>();
+
+	this->AddComponent<Velocity>();
 }
 Player::~Player()
 {

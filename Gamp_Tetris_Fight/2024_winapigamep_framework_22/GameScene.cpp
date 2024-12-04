@@ -28,7 +28,7 @@ void GameScene::Init()
 		leftWall->SetPos({ (int)leftEdge - 125, BOARD_POSY * 2 });
 		leftWall->SetSize({ 50, BOARD_SIZEY });
 		leftWall->SetWallSize(leftWall->GetSize());
-		leftWall->SetName(L"SideWall");
+		leftWall->SetName(L"Wall");
 		AddObject(leftWall, LAYER::Wall);
 
 		// Right Wall
@@ -36,7 +36,7 @@ void GameScene::Init()
 		rightWall->SetPos({ (int)rightEdge - 75, BOARD_POSY * 2 });
 		rightWall->SetSize({ 50, BOARD_SIZEY });
 		rightWall->SetWallSize(rightWall->GetSize());
-		rightWall->SetName(L"SideWall");
+		rightWall->SetName(L"Wall");
 		AddObject(rightWall, LAYER::Wall);
 
 		// Bottom Wall
@@ -44,7 +44,7 @@ void GameScene::Init()
 		bottomWall->SetPos({ BOARD_POSX - 100, (int)bottomEdge + 225 });
 		bottomWall->SetSize({ BOARD_SIZEX, 50 });
 		bottomWall->SetWallSize(bottomWall->GetSize());
-		bottomWall->SetName(L"BottomWall");
+		bottomWall->SetName(L"Wall");
 		AddObject(bottomWall, LAYER::Wall);
 	}
 	{
@@ -53,7 +53,7 @@ void GameScene::Init()
 		oPlayer1->SetPos({ 520.f, 60.f });
 		oPlayer1->SetSize({ 100.f,100.f });
 
-		Player* pPlayer1 = dynamic_cast<Player*>(oPlayer1);
+		Player* pPlayer1 = static_cast<Player*>(oPlayer1);
 		pPlayer1->SetKey(KEY_TYPE::A, KEY_TYPE::D); // 이동 방향 설정
 		pPlayer1->SetName(L"Striker");
 
@@ -61,7 +61,7 @@ void GameScene::Init()
 	}
 	{
 		Object* oPlayer2 = new Defender;
-		oPlayer2->SetPos({ 520.f, 700.f });
+		oPlayer2->SetPos({ 520.f, 750.f });
 		oPlayer2->SetSize({ 100.f,100.f });
 
 		Player* pPlayer2 = static_cast<Player*>(oPlayer2);

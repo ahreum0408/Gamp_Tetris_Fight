@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "StateMachine.h"
 #include "Animator.h"
+#include "Velocity.h"
 
 class Defender : public Player
 {
@@ -20,14 +21,15 @@ public:
 	StateMachine<Defender>* GetStateMachine() const { return m_stateMachine; }
 	void Jump();
 	bool IsGrounded() const { return m_isGrounded; }
-	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::UP); }
+	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::UP) && !m_isBlockAbove; }
 	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
 public:
-	void PlayIdleAnimation() { animator->PlayAnimation(L"RedDinoIdle", true); }
-	void PlayJumpAnimation() { animator->PlayAnimation(L"RedDinoJump", true); }
-	void PlayFallAnimation() { animator->PlayAnimation(L"RedDinoFall", true); }
+	void PlayIdleAnimation() { m_animator->PlayAnimation(L"RedDinoIdle", true); }
+	void PlayJumpAnimation() { m_animator->PlayAnimation(L"RedDinoJump", true); }
+	void PlayFallAnimation() { m_animator->PlayAnimation(L"RedDinoFall", true); }
 private:
 	bool IsGround(Collider* other);
+	bool IsBlock(Collider* other);
 	void SetJumpCount() { m_jumpCount = 0; }
 private:
 	enum class DefenderState {
@@ -40,10 +42,12 @@ private:
 	const int m_maxJumpCount;
 
 	bool m_isGrounded;
+	bool m_isBlockAbove = false;
 	const float m_jumpPower = 350.f;
 	const float m_gravity = 980.f;
 	Vec2 m_vVelocity;
 
 	Vec2 m_beforePos;
-	Animator* animator;
+	Collider* m_jumpCollider;
+	Velocity* m_velocity;
 };

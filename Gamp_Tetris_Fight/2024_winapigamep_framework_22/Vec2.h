@@ -8,6 +8,7 @@ public:
 	Vec2(POINT _pt) : x((float)_pt.x), y((float)_pt.y) {}
 	Vec2(int _x, int _y) : x((float)_x), y((float)_y) {}
 	Vec2(const Vec2& _other) : x(_other.x), y(_other.y) {}
+	Vec2 operator * (float _val) const;
 public:
 	Vec2 operator + (const Vec2& _vOther)
 	{
@@ -39,6 +40,11 @@ public:
 	{
 		x -= _other.x;
 		y -= _other.y;
+	}
+	Vec2& operator*=(float scalar) {
+		x *= scalar;
+		y *= scalar;
+		return *this; // 연산 후, 자기 자신을 반환하여 체이닝 가능하게 함
 	}
 	float LengthSquared()
 	{

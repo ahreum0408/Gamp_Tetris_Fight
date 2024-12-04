@@ -8,13 +8,14 @@
 
 Striker::Striker() {
 	this->AddComponent<CameraComponent>();
-	m_collider->SetSize({ 35,40 });
-	m_collider->SetOffSetPos({ 2, 0 });
+
+	m_pCollider->SetSize({ 35,40 });
+	m_pCollider->SetOffSetPos({ 2, 0 });
 
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Striker", L"Texture\\Dino\\DinoSprites - vita.bmp");
-	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"GreenDinoIdle", m_pTex, Vec2(0.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 3, 0.1f);
-	GetComponent<Animator>()->PlayAnimation(L"GreenDinoIdle", true);
+
+	m_animator->CreateAnimation(L"GreenDinoIdle", m_pTex, Vec2(0.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 3, 0.1f);
+	m_animator->PlayAnimation(L"GreenDinoIdle", true);
 }
 Striker::~Striker()
 {
@@ -43,8 +44,8 @@ void Striker::Update() {
 	if (GET_KEYDOWN(KEY_TYPE::LSHIFT)) { // ¾Æ·¡·Î Âï±â
 		CameraComponent* cam = GetComponent<CameraComponent>();
 		if (cam != nullptr) {
-			cout << "shake camera" << endl;
-			cam->ShakeCamera();
+			//cout << "shake camera" << endl;
+			//cam->ShakeCamera();
 		}
 		UseSkill();
 	}

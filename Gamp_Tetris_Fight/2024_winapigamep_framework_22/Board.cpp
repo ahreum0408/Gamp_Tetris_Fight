@@ -25,8 +25,7 @@ Board::Board() :
 {
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
     boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
-    //ghostBlock = new Block_Ghost();
-    //GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(ghostBlock, LAYER::BLOCK);
+    this->SetName(L"Block");
 }
 
 Board::~Board() {}

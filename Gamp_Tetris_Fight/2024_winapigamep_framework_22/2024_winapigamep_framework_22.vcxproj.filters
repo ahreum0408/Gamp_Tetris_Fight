@@ -226,6 +226,9 @@
     <ClInclude Include="GameOver.h">
       <Filter>Engine\03. Object\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Velocity.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -384,6 +387,9 @@
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
       <Filter>Engine\03. Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Velocity.cpp">
+      <Filter>Engine\06. Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
