@@ -23,6 +23,7 @@ public:
 	bool IsGrounded() const { return m_isGrounded; }
 	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::UP) && !m_isBlockAbove; }
 	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
+	void CreateDefendBlock();
 public:
 	void PlayIdleAnimation() { m_animator->PlayAnimation(L"RedDinoIdle", true); }
 	void PlayJumpAnimation() { m_animator->PlayAnimation(L"RedDinoJump", true); }
@@ -46,8 +47,10 @@ private:
 	const float m_jumpPower = 350.f;
 	const float m_gravity = 980.f;
 	Vec2 m_vVelocity;
+	Object* m_currentDefenceBlock;
 
 	Vec2 m_beforePos;
 	Collider* m_jumpCollider;
 	Velocity* m_velocity;
+
 };

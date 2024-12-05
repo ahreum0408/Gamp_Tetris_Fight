@@ -229,6 +229,7 @@
     <ClInclude Include="Velocity.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="DefenceBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -391,5 +392,6 @@
     <ClCompile Include="Velocity.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="DefenceBlock.cpp" />
   </ItemGroup>
 </Project>

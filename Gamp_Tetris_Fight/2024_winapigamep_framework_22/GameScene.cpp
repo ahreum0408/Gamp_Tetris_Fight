@@ -73,6 +73,7 @@ void GameScene::Init()
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::Wall);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::BLOCK);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BLOCK, LAYER::DefendBlock);
 
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGMInGame", L"Sound\\BGM\\BGM_InGame.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGMInGame");

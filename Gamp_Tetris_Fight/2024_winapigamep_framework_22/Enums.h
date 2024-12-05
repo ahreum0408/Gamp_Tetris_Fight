@@ -8,6 +8,7 @@ enum class LAYER
 	PROJECTILE,
 	BLOCK,
 	ENEMY,
+	DefendBlock,
 	// UI
 	END
 };
@@ -41,4 +42,4 @@ enum class BLOCK_TYPE
 	BLOCK_T,
 
 	NONE = 30
-};	
+};

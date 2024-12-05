@@ -183,6 +183,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DefenceBlock.h" />
     <ClInclude Include="Defender.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enemy.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DefenceBlock.cpp" />
     <ClCompile Include="Defender.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
