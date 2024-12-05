@@ -54,7 +54,7 @@ void Block::Update()
 	}
 
 	// 블럭이 화면 하단을 벗어나면 삭제
-	if (vPos.y >= 1100) {
+	if (vPos.y <= -100) {
 		GET_SINGLE(EventManager)->DeleteObject(this);
 		cout << "블럭 삭제" << endl;
 	}
