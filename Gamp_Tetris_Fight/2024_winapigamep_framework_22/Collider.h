@@ -24,6 +24,10 @@ public:
     void ExitCollision(Collider* _other); // 충돌해제
     const UINT& GetID() const { return m_ID; }
     CollisionDirection GetCollisionDirection(const Vec2& objectPos, const Vec2& otherPos);
+    Vec2 GetNormal(const Vec2& collisionPoint) const;
+    Vec2 GetPosition() const {
+        return GetOwner()->GetPos(); // Collider의 소유 객체의 위치 반환
+    }
 public:
     void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
     const Vec2& GetSize() const { return m_vSize; }
@@ -52,4 +56,3 @@ private:
 
     bool isTrigger = true;
 };
-

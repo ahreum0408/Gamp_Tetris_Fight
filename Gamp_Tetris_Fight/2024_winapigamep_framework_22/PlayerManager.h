@@ -6,17 +6,16 @@ class PlayerManager
 {
     DECLARE_SINGLE(PlayerManager);
 public:
-    void SetStriker(Striker* striker) { _striker = striker;  }
-    void SetDefender(Defender* defender) { _defender = defender; }
+    void SetStriker(Striker* striker) { _striker = striker; }
 
-    Striker* GetStriker() { return _striker;}
-    Defender* GetDefender() { return _defender; }
+    Striker* GetStriker() { return _striker; }
 
     void AddStrikerSkillCount() {
         _striker->PlusSkillCount();
     }
+    bool StrikerUseSkill() {
+        return _striker->UseSkill();
+    }
 private:
     Striker* _striker;
-    Defender* _defender;
 };
-

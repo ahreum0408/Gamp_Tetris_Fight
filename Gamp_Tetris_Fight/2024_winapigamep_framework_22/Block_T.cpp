@@ -12,7 +12,7 @@ Block_T::Block_T() :
 {
 	for (int i = 0; i < blockNum; ++i)
 	{
-		Block* block = new Block(texturePath);
+		Block* block = new Block(texturePath, this);
 		blockVec.push_back(block);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(block, LAYER::BLOCK);
 	}
@@ -108,6 +108,23 @@ void Block_T::SetBlockPosition()
 			}
 		}
 	}
+}
+
+void Block_T::SetIsDefence(bool isDefence)
+{
+	for (auto block : blockVec) {
+		block->SetIsDefence(isDefence);
+	}
+}
+
+bool Block_T::GetIsDefence()
+{
+	for (auto block : blockVec) {
+		if (block->GetIsDefence()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void Block_T::EnterCollision(Collider* _other)

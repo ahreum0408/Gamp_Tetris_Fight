@@ -18,6 +18,9 @@ public:
     bool CheckCollision(const std::vector<Vec2>& positions) override;
     const std::vector<Block*>& GetBlocks() override;
     void SetBlockPosition() override;
+
+    void SetIsDefence(bool isDefence) override;
+    bool GetIsDefence() override;
 public:
     void SetDir(Vec2 _dir)
     {

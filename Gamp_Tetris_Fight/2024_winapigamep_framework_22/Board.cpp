@@ -26,11 +26,6 @@ Board::Board() :
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
     boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
     this->SetName(L"Block");
-
-    // Sound
-    GET_SINGLE(ResourceManager)->LoadSound(L"BlockBreak", L"Sound\\BlockBreak.wav", false);
-    GET_SINGLE(ResourceManager)->LoadSound(L"BlockDown", L"Sound\\BlockDown.wav", false);
-    GET_SINGLE(ResourceManager)->LoadSound(L"BigBlockDown", L"Sound\\BigBlockDown.wav", false);
 }
 
 Board::~Board() {}
@@ -106,13 +101,17 @@ void Board::Update()
         // LSHIFT 키를 눌러 블록 쾅 찍기
         if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
         {
-            isSkill = true;
-            currentMoveDownDelay = 0;
-            GET_SINGLE(ResourceManager)->Play(L"BigBlockDown");
+            if (GET_SINGLE(PlayerManager)->StrikerUseSkill()) {
+                isSkill = true;
+                currentMoveDownDelay = 0;
+            }
+            else {
+                cout << "you can't use skill" << endl;
+            }
         }
 
         // Block Down
-        if (moveDownTimer >= currentMoveDownDelay)
+        if (moveDownTimer >= currentMoveDownDelay && currentBlock)
         {
             if (CheckFloor(currentBlock->GetBlocks()))
             {
@@ -120,7 +119,6 @@ void Board::Update()
 
                 // 1. 블럭 쌓고
                 BuildBlock(currentBlock);
-                if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
                 if (isGameOver) return;
                 isSkill = false;
                 // 2. 줄 찼는지 검사
@@ -129,8 +127,13 @@ void Board::Update()
                 currentBlock = nullptr;
                 CreateBlock();
             }
-
-            currentBlock->MoveDown();
+            if (!currentBlock->GetIsDefence()) {
+                currentBlock->MoveDown(); // 이게 바닥에 내리는거
+            }
+            else {
+                //GET_SINGLE(EventManager)->DeleteObject(currentBlock);
+                currentBlock = nullptr; // 사실 안해도 되는데 이거 안해주면 메모리가 빌거야
+            }
             moveDownTimer = 0;
         }
         else
@@ -195,8 +198,6 @@ void Board::RemoveRow(int row)
         GET_SINGLE(EventManager)->DeleteObject(boardVec[row][col]);
         boardVec[row][col] = nullptr;
     }
-
-    GET_SINGLE(ResourceManager)->Play(L"BlockBreak");
 
     if (++skillCnt == canSkillCnt)
         GET_SINGLE(PlayerManager)->AddStrikerSkillCount();

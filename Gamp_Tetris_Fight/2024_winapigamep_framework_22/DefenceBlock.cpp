@@ -10,7 +10,7 @@
 #include "Camera.h"
 #include "EventManager.h"
 
-DefenceBlock::DefenceBlock(Defender* defender) : m_defender(defender), m_lifeTime(0.3f)
+DefenceBlock::DefenceBlock(Defender* defender) : m_defender(defender), m_lifeTime(0.5f)
 {
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"DefenderBlock", L"Texture\\defend-block.bmp");
     AddComponent<Collider>();
@@ -66,13 +66,5 @@ void DefenceBlock::Render(HDC _hdc)
 
 void DefenceBlock::EnterCollision(Collider* _other)
 {
-    wstring otherName = _other->GetOwner()->GetName();
 
-    if (otherName == L"Block") {
-        // 충돌이 발생한 경우 처리
-        cout << "defence block" << endl;
-
-        // 필요 시 바로 블록 파괴
-        //delete(this);
-    }
 }

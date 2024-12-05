@@ -6,13 +6,13 @@
 #include "Collider.h"
 
 Block_L::Block_L() :
-    blockNum(4),
-    m_vDir(1.f, 1.f),
-    rotationIndex(0)
+	blockNum(4),
+	m_vDir(1.f, 1.f),
+	rotationIndex(0)
 {
 	for (int i = 0; i < blockNum; ++i)
 	{
-		Block* block = new Block(texturePath);
+		Block* block = new Block(texturePath, this);
 		blockVec.push_back(block);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(block, LAYER::BLOCK);
 	}
@@ -88,6 +88,23 @@ bool Block_L::CheckCollision(const std::vector<Vec2>& positions)
 }
 
 const std::vector<Block*>& Block_L::GetBlocks() { return blockVec; }
+
+void Block_L::SetIsDefence(bool isDefence)
+{
+	for (auto block : blockVec) {
+		block->SetIsDefence(isDefence);
+	}
+}
+
+bool Block_L::GetIsDefence()
+{
+	for (auto block : blockVec) {
+		if (block->GetIsDefence()) {
+			return true;
+		}
+	}
+	return false;
+}
 
 void Block_L::SetBlockPosition()
 {

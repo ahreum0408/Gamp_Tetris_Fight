@@ -8,7 +8,7 @@ enum class LAYER
 	PROJECTILE,
 	BLOCK,
 	ENEMY,
-	DefendBlock,
+	DEFENCEBLOCK,
 	// UI
 	END
 };

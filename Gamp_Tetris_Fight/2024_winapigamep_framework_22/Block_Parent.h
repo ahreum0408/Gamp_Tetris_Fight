@@ -19,4 +19,7 @@ public:
 
     virtual bool CheckCollision(const std::vector<Vec2>& positions) abstract;
     virtual const std::vector<Block*>& GetBlocks() abstract;
+
+    virtual void SetIsDefence(bool isDefence) abstract;
+    virtual bool GetIsDefence() abstract;
 };

@@ -6,8 +6,8 @@ class Block_I :
     public Block_Parent
 {
 public:
-	Block_I();
-	~Block_I(); 
+    Block_I();
+    ~Block_I();
     void Update() override;
     void Render(HDC _hdc) override;
 
@@ -18,6 +18,9 @@ public:
     // override
     bool CheckCollision(const std::vector<Vec2>& positions) override;
     const std::vector<Block*>& GetBlocks() override;
+
+    void SetIsDefence(bool isDefence) override;
+    bool GetIsDefence() override;
 private:
     void SetBlockPosition();
 public:
@@ -39,7 +42,7 @@ private:
     Vec2 m_vDir;
 
     int rotationIndex; // 현재 회전 상태를 나타내는 인덱스
-    int Rotation[4][3][3] = 
+    int Rotation[4][3][3] =
     {
         {
             {0, 0, 0},

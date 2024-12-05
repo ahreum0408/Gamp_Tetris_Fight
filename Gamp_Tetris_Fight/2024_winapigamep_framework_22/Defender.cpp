@@ -109,7 +109,7 @@ void Defender::Jump() {
 void Defender::CreateDefendBlock()
 {
     Object* block = new DefenceBlock(this); // Defender 자신을 전달
-    GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(block, LAYER::DefendBlock);
+    GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(block, LAYER::DEFENCEBLOCK);
 
     // 초기 블록 위치 설정
     Vec2 defenderPos = GetPos();

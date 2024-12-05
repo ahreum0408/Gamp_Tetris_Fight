@@ -5,8 +5,9 @@
 #include "Collider.h"
 #include "ResourceManager.h"
 #include "Animator.h"
+#include "PlayerManager.h"
 
-Striker::Striker() {
+Striker::Striker() : m_skillCount(0) {
 	this->AddComponent<CameraComponent>();
 
 	m_pCollider->SetSize({ 35,40 });
@@ -16,22 +17,46 @@ Striker::Striker() {
 
 	m_animator->CreateAnimation(L"GreenDinoIdle", m_pTex, Vec2(0.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 3, 0.1f);
 	m_animator->PlayAnimation(L"GreenDinoIdle", true);
+
+	m_camera = GetComponent<CameraComponent>();
+
+	GET_SINGLE(PlayerManager)->SetStriker(this);
 }
 Striker::~Striker()
 {
 }
 
-bool Striker::CanUseSkill()
+void Striker::EnterCollision(Collider* _other)
 {
-	//return m_skillCount > 0;
-	return true;
+	wstring name = _other->GetOwner()->GetName();
+	if (name == L"Block") {
+		cout << "공격수 배패.." << endl;
+	}
+}
+void Striker::StayCollision(Collider* _other)
+{
+}
+void Striker::ExitCollision(Collider* _other)
+{
 }
 
-void Striker::UseSkill()
+bool Striker::CanUseSkill()
+{
+	return m_skillCount > 0;
+}
+
+bool Striker::UseSkill()
 {
 	if (CanUseSkill()) {
-		cout << "struker use skill" << endl;
+		if (m_camera != nullptr) {
+			cout << "shake camera" << endl;
+			m_camera->ShakeCamera();
+		}
+		m_skillCount--;
+		cout << "깍임 - " << m_skillCount << endl;
+		return true;
 	}
+	return false;
 }
 void Striker::Update() {
 	Vec2 vPos = GetPos();
@@ -41,14 +66,6 @@ void Striker::Update() {
 	}
 	if (GET_KEYDOWN(m_rightMoveKey)) {
 		vPos.x += 40.f;
-	}
-	if (GET_KEYDOWN(KEY_TYPE::LSHIFT)) { // 아래로 찍기
-		CameraComponent* cam = GetComponent<CameraComponent>();
-		if (cam != nullptr) {
-			//cout << "shake camera" << endl;
-			//cam->ShakeCamera();
-		}
-		UseSkill();
 	}
 
 	SetPos(vPos);

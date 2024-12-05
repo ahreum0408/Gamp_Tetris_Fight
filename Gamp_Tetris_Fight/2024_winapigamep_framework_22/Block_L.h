@@ -17,6 +17,9 @@ public:
     // override
     bool CheckCollision(const std::vector<Vec2>& positions) override;
     const std::vector<Block*>& GetBlocks() override;
+
+    void SetIsDefence(bool isDefence) override;
+    bool GetIsDefence() override;
 private:
     void SetBlockPosition();
 public:
