@@ -4,6 +4,7 @@
 #include "GameRule.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
 
 void StartScene::Init()
 {
@@ -26,6 +27,10 @@ void StartScene::Init()
 		PopUp = gameRule;
 	}
 	AddObject(PopUp, LAYER::BACKGROUND);
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"UIClick", L"Sound\\UIClick.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGMTitle", L"Sound\\BGM\\BGM_Title.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"BGMTitle");
 }
 
 void StartScene::Update()
@@ -34,6 +39,7 @@ void StartScene::Update()
 
 	if (!isGameRuleOn && (GET_KEYDOWN(KEY_TYPE::SPACE) || GET_KEYDOWN(KEY_TYPE::ENTER)))
 	{
+		GET_SINGLE(ResourceManager)->Play(L"UIClick");
 		switch (title->curIndex)
 		{
 		case 0:
@@ -50,7 +56,10 @@ void StartScene::Update()
 		}
 	}
 	else if (isGameRuleOn && GET_KEYDOWN(KEY_TYPE::ESC))
+	{
+		GET_SINGLE(ResourceManager)->Play(L"UIClick");
 		isGameRuleOn = false;
+	}
 
 	if (title != nullptr && PopUp != nullptr)
 	{
@@ -72,5 +81,6 @@ void StartScene::Release()
 	title = nullptr;
 	PopUp = nullptr;
 
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	Scene::Release();
 }

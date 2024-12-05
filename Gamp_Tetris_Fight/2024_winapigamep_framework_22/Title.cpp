@@ -19,6 +19,7 @@ Title::Title() :
 
 Title::~Title()
 {
+	GET_SINGLE(ResourceManager)->LoadSound(L"UIClick", L"Sound\\UIClick.wav", false);
 }
 
 void Title::Update()
@@ -27,10 +28,22 @@ void Title::Update()
 		return;
 
 	if (GET_KEYDOWN(KEY_TYPE::DOWN) || GET_KEYDOWN(KEY_TYPE::S))
-		if (index < 2) index += 1;
+	{
+		if (index < 2)
+		{
+			index += 1;
+			GET_SINGLE(ResourceManager)->Play(L"UIClick");
+		}
+	}
 		
 	if (GET_KEYDOWN(KEY_TYPE::UP) || GET_KEYDOWN(KEY_TYPE::W))
-		if (index > 0) index -= 1;
+	{
+		if (index > 0)
+		{
+			index -= 1;
+			GET_SINGLE(ResourceManager)->Play(L"UIClick");
+		}
+	}
 
 	if (index != curIndex)
 		switch (index)

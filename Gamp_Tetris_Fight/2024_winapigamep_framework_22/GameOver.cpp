@@ -8,10 +8,15 @@ GameOver::GameOver() :
 	curIndex(1)
 {
 	// 둘 중 누가 이겼는지 빨간 디노인지
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
+	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\RedDinoWin.bmp");
 
 	retryTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RetryTextOff", L"Texture\\GameOverScene\\RetryTextOff.bmp");
 	exitTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"ExitTextOff", L"Texture\\StartScene\\ExitTextOff.bmp");
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"UIClick", L"Sound\\UIClick.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"GameWin", L"Sound\\GameWin.wav", false);
+	GET_SINGLE(ResourceManager)->Play(L"GameWin");
 }
 
 GameOver::~GameOver()
@@ -21,10 +26,23 @@ GameOver::~GameOver()
 void GameOver::Update()
 {
 	if (GET_KEYDOWN(KEY_TYPE::DOWN) || GET_KEYDOWN(KEY_TYPE::S))
-		if (index < 1) index += 1;
+	{
+		if (index < 1)
+		{
+			index += 1;
+			GET_SINGLE(ResourceManager)->Play(L"UIClick");
+		}
+	}
 
 	if (GET_KEYDOWN(KEY_TYPE::UP) || GET_KEYDOWN(KEY_TYPE::W))
-		if (index > 0) index -= 1;
+	{
+
+		if (index > 0)
+		{
+			index -= 1;
+			GET_SINGLE(ResourceManager)->Play(L"UIClick");
+		}
+	}
 
 	if (index != curIndex)
 		switch (index)

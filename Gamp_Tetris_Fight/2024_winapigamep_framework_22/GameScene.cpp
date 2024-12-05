@@ -7,10 +7,10 @@
 #include "Wall.h"
 #include "CollisionManager.h"
 #include "PlayerManager.h"
+#include "ResourceManager.h"
 
 void GameScene::Init()
 {
-
 	{
 		Board* board = new Board;
 		board->SetPos({ SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2 });
@@ -73,9 +73,19 @@ void GameScene::Init()
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::Wall);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::BLOCK);
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGMInGame", L"Sound\\BGM\\BGM_InGame.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"BGMInGame");
 }
 
 void GameScene::Update()
 {
 	Scene::Update();
+}
+
+void GameScene::Release()
+{
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+
+	Scene::Release();
 }

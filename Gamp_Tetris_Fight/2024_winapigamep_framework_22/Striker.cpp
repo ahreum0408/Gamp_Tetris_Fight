@@ -23,7 +23,8 @@ Striker::~Striker()
 
 bool Striker::CanUseSkill()
 {
-	return m_skillCount > 0;
+	//return m_skillCount > 0;
+	return true;
 }
 
 void Striker::UseSkill()

@@ -26,6 +26,11 @@ Board::Board() :
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
     boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
     this->SetName(L"Block");
+
+    // Sound
+    GET_SINGLE(ResourceManager)->LoadSound(L"BlockBreak", L"Sound\\BlockBreak.wav", false);
+    GET_SINGLE(ResourceManager)->LoadSound(L"BlockDown", L"Sound\\BlockDown.wav", false);
+    GET_SINGLE(ResourceManager)->LoadSound(L"BigBlockDown", L"Sound\\BigBlockDown.wav", false);
 }
 
 Board::~Board() {}
@@ -103,6 +108,7 @@ void Board::Update()
         {
             isSkill = true;
             currentMoveDownDelay = 0;
+            GET_SINGLE(ResourceManager)->Play(L"BigBlockDown");
         }
 
         // Block Down
@@ -114,6 +120,7 @@ void Board::Update()
 
                 // 1. ºí·° ½×°í
                 BuildBlock(currentBlock);
+                if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
                 if (isGameOver) return;
                 isSkill = false;
                 // 2. ÁÙ Ã¡´ÂÁö °Ë»ç
@@ -188,6 +195,8 @@ void Board::RemoveRow(int row)
         GET_SINGLE(EventManager)->DeleteObject(boardVec[row][col]);
         boardVec[row][col] = nullptr;
     }
+
+    GET_SINGLE(ResourceManager)->Play(L"BlockBreak");
 
     if (++skillCnt == canSkillCnt)
         GET_SINGLE(PlayerManager)->AddStrikerSkillCount();
