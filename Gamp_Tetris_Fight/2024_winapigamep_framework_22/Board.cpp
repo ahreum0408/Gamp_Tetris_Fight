@@ -22,14 +22,19 @@
 Board::Board() :
     boardWidth(10), boardHeight(20), isSkill(false),
     currentBlock(nullptr), nextBlock(BLOCK_TYPE::NONE),
-    m_pTex(nullptr), nextBlockTex(nullptr)
+    m_pTex(nullptr), nextBlockTex(nullptr), myFont(nullptr)
 {
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
     boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
     this->SetName(L"Block");
+
+    AddFontResource(L"Font\\Galmuri11.ttf");
 }
 
-Board::~Board() {}
+Board::~Board() 
+{
+    ::DeleteObject(myFont);
+}
 
 void Board::Render(HDC _hdc)
 {
@@ -67,16 +72,39 @@ void Board::Render(HDC _hdc)
     }
 
     {
-        //AddFontResource();
-        //HFONT font = CreateFont();
-        //GDISelector font(_hdc, font);
-        SetTextColor(_hdc, WHITENESS);
-        wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetSkillCount());
-        TextOut(_hdc, GetPos().x - 450, 0, wstr.c_str(), wstr.length());
+        myFont = ::CreateFont(
+              20                       // 높이
+            , 0                        // 폭 0이면 높이와 비례
+            , 0                        // 글자 전체 기울기
+            , 0                        // 기준선이 정해진 기울기
+            , 0                  // 폰트의 두께
+            , 0                        // 이탤릭
+            , 0                        // 밑줄
+            , 0                        // 취소선
+            , DEFAULT_CHARSET          // 케릭터 셋
+            , 0                        // 정밀도
+            , 0                        // 정밀도
+            , 0                        // 정밀도
+            , 0                        // 정밀도
+            , L"Galmuri11"        // 글꼴이름
+        );
+        GDISelector font(_hdc, myFont);
+        SetTextColor(_hdc, RGB(255, 255, 255));
 
-        wstring keyStr =
-            L"[공격수]\n블럭 회전 : W\n좌우이동 : A, D\n스킬 : LShift\n[수비수]\n좌우이동 : 오른쪽 왼쪽 화살표\n점프 : 위쪽 화살표\n패딩 : Space";
-        TextOut(_hdc, GetPos().x - 450, 0, wstr.c_str(), wstr.length());
+        // 스킬
+        wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetSkillCount());
+        TextOut(_hdc, 120, 60, wstr.c_str(), wstr.length());
+
+        // 공격수
+        TextOut(_hdc, GetPos().x + 110, 180, L"[공격수]", wcslen(L"[공격수]"));
+        TextOut(_hdc, GetPos().x + 110, 215, L"블럭 회전 : W", wcslen(L"블럭 회전 : W"));
+        TextOut(_hdc, GetPos().x + 110, 250, L"좌우이동 : A, D", wcslen(L"좌우이동 : A, D"));
+        TextOut(_hdc, GetPos().x + 110, 285, L"스킬 : LShift", wcslen(L"스킬 : LShift"));
+        // 수비수
+        TextOut(_hdc, GetPos().x + 110, 350, L"[수비수]", wcslen(L"[수비수]"));
+        TextOut(_hdc, GetPos().x + 110, 385, L"좌우이동 : 오른쪽 왼쪽 화살표", wcslen(L"좌우이동 : 오른쪽 왼쪽 화살표"));
+        TextOut(_hdc, GetPos().x + 110, 420, L"점프 : 위쪽 화살표", wcslen(L"점프 : 위쪽 화살표"));
+        TextOut(_hdc, GetPos().x + 110, 455, L"패딩 : Space", wcslen(L"패딩 : Space"));
     }
 }
 
