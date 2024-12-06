@@ -10,15 +10,15 @@ void SceneManager::Init()
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
-	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
+	//RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
 	RegisterScene(L"StartScene",std::make_shared<StartScene>());
 	RegisterScene(L"GameOverScene",std::make_shared<GameOverScene>());
 
 	// ¾À ·Îµå
+	LoadScene(L"StartScene");
 	//LoadScene(L"GameScene");
-	//LoadScene(L"StartScene");
-	LoadScene(L"GameOverScene");
+	//LoadScene(L"GameOverScene");
 }
 
 void SceneManager::Update()
