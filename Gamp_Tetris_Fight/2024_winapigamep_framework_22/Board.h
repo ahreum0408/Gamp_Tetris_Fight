@@ -28,7 +28,7 @@ public:
     Vec2 GetBoardOrigin() const;
 private:
     const int boardWidth = 10; // 보드 가로 크기
-    const int boardHeight = 20; // 보드 세로 크기
+    const int boardHeight = 19; // 보드 세로 크기
 
     // Block Down
     int moveDownTimer = 0;

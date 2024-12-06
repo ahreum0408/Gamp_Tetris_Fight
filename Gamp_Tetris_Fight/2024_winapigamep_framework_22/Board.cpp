@@ -20,7 +20,7 @@
 #include "GDISelector.h"
 
 Board::Board() :
-    boardWidth(10), boardHeight(20), isSkill(false),
+    boardWidth(10), boardHeight(19), isSkill(false),
     currentBlock(nullptr), nextBlock(BLOCK_TYPE::NONE),
     m_pTex(nullptr), nextBlockTex(nullptr), myFont(nullptr)
 {
@@ -211,7 +211,10 @@ void Board::BuildBlock(Block_Parent* blockParent)
         if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
         {
             if (boardVec[row][col] == nullptr)
+            {
+                cout << row << col << endl;
                 boardVec[row][col] = block;
+            }
         }
     }
 }
@@ -247,7 +250,10 @@ void Board::RemoveRow(int row)
     }
 
     if (++skillCnt == canSkillCnt)
+    {
+        skillCnt = 0;
         GET_SINGLE(PlayerManager)->AddStrikerSkillCount();
+    }
 }
 
 void Board::MoveBlocksDown(int row)
@@ -275,7 +281,8 @@ void Board::MoveBlocksDown(int row)
 
 bool Board::CheckFloor(const std::vector<Block*>& blocks) const
 {
-    float boardFloor = GetPos().y + GetSize().y / 2; // 보드의 시작점(Screen Space 기준)
+    // 이거 이상한데
+    float boardFloor = GetPos().y + (boardHeight / 2 * BLOCK_SIZE); // 보드의 시작점(Screen Space 기준)
 
     for (const Block* block : blocks)
     {
@@ -406,9 +413,8 @@ void Board::CreateBlock()
     // 보드의 시작점 좌표
     float boardStartY = GetPos().y - (boardHeight * BLOCK_SIZE) / 2;
 
-    // 블록을 보드의 -1번째 줄에 배치
     float blockStartX = GetPos().x - BLOCK_SIZE * 2;
-    float blockStartY = boardStartY + BLOCK_SIZE * 4;
+    float blockStartY = boardStartY + BLOCK_SIZE * 4 - 20;
 
     block->SetPos({ blockStartX, blockStartY - BLOCK_SIZE / 2 });
     currentBlock = block;
