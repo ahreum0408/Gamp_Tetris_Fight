@@ -58,7 +58,7 @@ void Board::Render(HDC _hdc)
         // NextBlock
         Vec2 boardOrigin = GetBoardOrigin();
         Vec2 vPos = { boardOrigin.x + boardWidth * BLOCK_SIZE + 100.f,
-        boardOrigin.y + 80.f };
+        boardOrigin.y + 60.f };
         Vec2 vSize = { 120.f,80.f };
         Vec2 camerapos = GET_SINGLE(Camera)->GetCameraPos();
         int width = nextBlockTex->GetWidth();
