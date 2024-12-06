@@ -17,6 +17,7 @@
 #include "Block_T.h"
 #include "Block_Z.h"
 #include "Camera.h"
+#include "GDISelector.h"
 
 Board::Board() :
     boardWidth(10), boardHeight(20), isSkill(false),
@@ -32,33 +33,51 @@ Board::~Board() {}
 
 void Board::Render(HDC _hdc)
 {
-    // Board
-    Vec2 vPos = GetPos();
-    Vec2 vSize = GetSize();
-    Vec2 camerapos = GET_SINGLE(Camera)->GetCameraPos();
-    int width = m_pTex->GetWidth();
-    int height = m_pTex->GetHeight();
+    {
+        // Board
+        Vec2 vPos = GetPos();
+        Vec2 vSize = GetSize();
+        Vec2 camerapos = GET_SINGLE(Camera)->GetCameraPos();
+        int width = m_pTex->GetWidth();
+        int height = m_pTex->GetHeight();
 
-    ::TransparentBlt(_hdc
-        , (int)(vPos.x - width / 2 - ((int)camerapos.x))
-        , (int)(vPos.y - height / 2 - ((int)camerapos.y))
-        , width, height,
-        m_pTex->GetTexDC()
-        , 0, 0, width, height, RGB(255, 0, 255));
+        ::TransparentBlt(_hdc
+            , (int)(vPos.x - width / 2 - ((int)camerapos.x))
+            , (int)(vPos.y - height / 2 - ((int)camerapos.y))
+            , width, height,
+            m_pTex->GetTexDC()
+            , 0, 0, width, height, RGB(255, 0, 255));
+    }
 
-    // NextBlock
-    Vec2 boardOrigin = GetBoardOrigin();
-    vPos = { boardOrigin.x + boardWidth * BLOCK_SIZE + 100.f,
-    boardOrigin.y + 80.f };
-    vSize = { 120.f,80.f };
-    width = nextBlockTex->GetWidth();
-    height = nextBlockTex->GetHeight();
-    ::TransparentBlt(_hdc
-        , (int)(vPos.x - width / 2 - ((int)camerapos.x))
-        , (int)(vPos.y - height / 2 - ((int)camerapos.y))
-        , width, height,
-        nextBlockTex->GetTexDC()
-        , 0, 0, width, height, RGB(255, 0, 255));
+    {
+        // NextBlock
+        Vec2 boardOrigin = GetBoardOrigin();
+        Vec2 vPos = { boardOrigin.x + boardWidth * BLOCK_SIZE + 100.f,
+        boardOrigin.y + 80.f };
+        Vec2 vSize = { 120.f,80.f };
+        Vec2 camerapos = GET_SINGLE(Camera)->GetCameraPos();
+        int width = nextBlockTex->GetWidth();
+        int height = nextBlockTex->GetHeight();
+        ::TransparentBlt(_hdc
+            , (int)(vPos.x - width / 2 - ((int)camerapos.x))
+            , (int)(vPos.y - height / 2 - ((int)camerapos.y))
+            , width, height,
+            nextBlockTex->GetTexDC()
+            , 0, 0, width, height, RGB(255, 0, 255));
+    }
+
+    {
+        //AddFontResource();
+        //HFONT font = CreateFont();
+        //GDISelector font(_hdc, font);
+        SetTextColor(_hdc, WHITENESS);
+        wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetSkillCount());
+        TextOut(_hdc, GetPos().x - 450, 0, wstr.c_str(), wstr.length());
+
+        wstring keyStr =
+            L"[공격수]\n블럭 회전 : W\n좌우이동 : A, D\n스킬 : LShift\n[수비수]\n좌우이동 : 오른쪽 왼쪽 화살표\n점프 : 위쪽 화살표\n패딩 : Space";
+        TextOut(_hdc, GetPos().x - 450, 0, wstr.c_str(), wstr.length());
+    }
 }
 
 void Board::Update()

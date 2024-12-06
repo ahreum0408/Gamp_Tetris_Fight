@@ -14,6 +14,7 @@ public:
 		m_skillCount++;
 		cout << "´õÇØÁü - " << m_skillCount << endl;
 	}
+	int GetSkillCount() { return m_skillCount; }
 public:
 	virtual void EnterCollision(Collider* _other) override;
 	virtual void StayCollision(Collider* _other) override;
