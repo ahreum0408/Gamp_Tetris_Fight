@@ -32,8 +32,8 @@ private:
 
     // Block Down
     int moveDownTimer = 0;
-    int currentMoveDownDelay = 100;
-    const int moveDownDelay = 100;
+    int currentMoveDownDelay = 50;
+    const int moveDownDelay = 50;
 
     // Skill
     bool isSkill = false;
@@ -41,6 +41,7 @@ private:
     int canSkillCnt = 4;
 
     Texture* m_pTex;
+    HFONT myFont;
 
     // 2D 배열로 보드 상태 관리
     vector<vector<Block*>> boardVec;
