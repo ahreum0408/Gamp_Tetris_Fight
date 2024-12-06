@@ -54,7 +54,7 @@ void Block::Update()
 	}
 
 	// 블럭이 화면 하단을 벗어나면 삭제
-	if (vPos.y <= -100) {
+	if (vPos.y <= 0) {
 		GET_SINGLE(EventManager)->DeleteObject(this);
 		cout << "블럭 삭제" << endl;
 	}
@@ -81,7 +81,22 @@ Vec2 Block::GetDirection(Collider* _other, const Vec2& point) {
 	// 반사 벡터 계산
 	Vec2 reflectedDir = m_vDir - normal * 2 * m_vDir.Dot(normal);
 	reflectedDir.Normalize();
-	return reflectedDir;// 반사 방향 반환
+
+	// 반사 방향이 위쪽(-Y 방향)을 강제
+	if (reflectedDir.y > 0) {
+		reflectedDir.y = -reflectedDir.y; // 아래로 가는 경우 위쪽으로 반전
+	}
+
+	// Y축 성분이 너무 작으면 보정
+	const float minY = -0.3f; // 최소 Y값 제한 (너무 평평한 반사 방지)
+	if (reflectedDir.y > minY) {
+		float adjustFactor = sqrt(1 - minY * minY); // X와 Y가 단위 벡터를 유지하도록 보정
+		reflectedDir.x *= adjustFactor;
+		reflectedDir.y = minY; // 최소 Y값으로 보정
+		reflectedDir.Normalize(); // 최종 벡터 정규화
+	}
+
+	return reflectedDir; // 반사 방향 반환
 }
 Vec2 Block::GetRandomDirection() {
 	float minAngle = -120.f * (M_PI / 180.f);

@@ -36,15 +36,12 @@ void Collider::Render(HDC _hdc)
     GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
     RECT_RENDER(_hdc, m_vLatePos.x, m_vLatePos.y,
         m_vSize.x, m_vSize.y);*/
-
 }
 
 void Collider::EnterCollision(Collider* _other)
 {
     wstring name = _other->GetOwner()->GetName();
-    //std::string simpleString(name.begin(), name.end()); // wstring을 string으로 변환
-    //std::cout << simpleString << std::endl;             // 변환된 string 출력
-    if (!GetOwner()->GetComponent<Collider>()->GetIsTrigger() && name == L"Block")
+    if (name == L"Block")
     {
         Velocity* velocity = GetOwner()->GetComponent<Velocity>();
         if (velocity)
@@ -56,9 +53,18 @@ void Collider::EnterCollision(Collider* _other)
             Vec2 collisionDir = ownerPos - otherPos; // 상대방 -> 자신으로 방향 설정
             collisionDir.Normalize();
 
-            // 밀어내기 강도 증가
-            Vec2 pushBack = collisionDir * 0.8f; // 밀어내는 강도
-            Vec2 newPos = ownerPos + pushBack;   // 새로운 위치 업데이트
+            // 가장 가까운 축으로 방향 제한
+            Vec2 snappedDir;
+            if (fabs(collisionDir.x) > fabs(collisionDir.y)) {
+                snappedDir = Vec2(collisionDir.x > 0 ? 1 : -1, 0); // 좌우로 스냅
+            }
+            else {
+                snappedDir = Vec2(0, collisionDir.y > 0 ? 1 : -1); // 상하로 스냅
+            }
+
+            // 밀어내기 강도
+            Vec2 pushBack = snappedDir * 0.8f;
+            Vec2 newPos = ownerPos + pushBack; // 새로운 위치 업데이트
             GetOwner()->SetPos(newPos);
         }
     }
@@ -71,7 +77,7 @@ void Collider::EnterCollision(Collider* _other)
 void Collider::StayCollision(Collider* _other)
 {
     wstring name = _other->GetOwner()->GetName();
-    if (!GetOwner()->GetComponent<Collider>()->GetIsTrigger() && name == L"Block")
+    if (name == L"Block")
     {
         Velocity* velocity = GetOwner()->GetComponent<Velocity>();
         if (velocity)
@@ -83,11 +89,19 @@ void Collider::StayCollision(Collider* _other)
             Vec2 collisionDir = ownerPos - otherPos; // 상대방 -> 자신으로 방향 설정
             collisionDir.Normalize();
 
-            // 밀어내기 강도 증가
-            Vec2 pushBack = collisionDir * 1.f; // 밀어내는 강도
-            Vec2 newPos = ownerPos + pushBack;   // 새로운 위치 업데이트
-            GetOwner()->SetPos(newPos);
+            // 가장 가까운 축으로 방향 제한
+            Vec2 snappedDir;
+            if (fabs(collisionDir.x) > fabs(collisionDir.y)) {
+                snappedDir = Vec2(collisionDir.x > 0 ? 1 : -1, 0); // 좌우로 스냅
+            }
+            else {
+                snappedDir = Vec2(0, collisionDir.y > 0 ? 1 : -1); // 상하로 스냅
+            }
 
+            // 밀어내기 강도
+            Vec2 pushBack = snappedDir * 1.0f;
+            Vec2 newPos = ownerPos + pushBack; // 새로운 위치 업데이트
+            GetOwner()->SetPos(newPos);
         }
     }
 

@@ -56,6 +56,9 @@ void Defender::Update() {
     if (GET_KEYDOWN(KEY_TYPE::SPACE)) {
         UseSkill();
     }
+    if (GET_KEYDOWN(KEY_TYPE::Q)) {
+        GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
+    }
 
     m_stateMachine->Update();
 
@@ -80,7 +83,8 @@ void Defender::EnterCollision(Collider* _other) {
     }
     CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
     if (direction == CollisionDirection::Top) {
-        cout << "수비수 패배.." << endl;
+        cout << "수비수 배패.." << endl;
+        //GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
     }
 }
 void Defender::StayCollision(Collider* _other)

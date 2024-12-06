@@ -41,7 +41,7 @@ private:
 	Vec2 m_vDir;
 	Texture* m_pTex;
 	Block_Parent* m_parent;
-	float m_blockSpeed = 5.0f;
+	float m_blockSpeed = 3.0f;
 private:
 	Collider* m_collider;
 	Velocity* m_velocity;

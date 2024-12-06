@@ -32,8 +32,8 @@ protected:
 	Animator* m_animator;
 
 	// 플레이어 크기 만큼 더 조절
-	const float minX = 300 + 24;
-	const float maxX = 700 - 24;
+	const float minX = 300 + 16;
+	const float maxX = 700 - 18;
 
 	bool m_canMoveLeft = true;
 	bool m_canMoveRight = true;

@@ -41,7 +41,7 @@ void GameScene::Init()
 
 		// Bottom Wall
 		Wall* bottomWall = new Wall;
-		bottomWall->SetPos({ BOARD_POSX - 100, (int)bottomEdge + 225 });
+		bottomWall->SetPos({ BOARD_POSX - 100, (int)bottomEdge + 180 });
 		bottomWall->SetSize({ BOARD_SIZEX, 50 });
 		bottomWall->SetWallSize(bottomWall->GetSize());
 		bottomWall->SetName(L"Wall");
@@ -57,22 +57,23 @@ void GameScene::Init()
 		pPlayer1->SetKey(KEY_TYPE::A, KEY_TYPE::D); // 이동 방향 설정
 		pPlayer1->SetName(L"Striker");
 
-		AddObject(oPlayer1, LAYER::PLAYER); // 레이어도 바꿔야할겅ㅁ
+		AddObject(oPlayer1, LAYER::STRIKER); // 레이어도 바꿔야할겅ㅁ
 	}
 	{
 		Object* oPlayer2 = new Defender;
-		oPlayer2->SetPos({ 520.f, 750.f });
+		oPlayer2->SetPos({ 520.f, 600.f });
 		oPlayer2->SetSize({ 100.f,100.f });
 
 		Player* pPlayer2 = static_cast<Player*>(oPlayer2);
 		pPlayer2->SetKey(KEY_TYPE::LEFT, KEY_TYPE::RIGHT); // 이동 방향 설정
 		pPlayer2->SetName(L"Defender");
 
-		AddObject(oPlayer2, LAYER::PLAYER);// 레이어도 바꿔야할겅ㅁ
+		AddObject(oPlayer2, LAYER::DEFENDER);// 레이어도 바꿔야할겅ㅁ
 	}
 
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::Wall);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::BLOCK);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::DEFENDER, LAYER::Wall);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::DEFENDER, LAYER::BLOCK);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::STRIKER, LAYER::BLOCK);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BLOCK, LAYER::DEFENCEBLOCK);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::BLOCK, LAYER::Wall);
 
