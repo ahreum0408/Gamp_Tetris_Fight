@@ -60,6 +60,16 @@ void Block::Update()
 	}
 }
 
+void Block::StartFireBlock() // 무한 반복이 됨 이거 끊어주는게 필요함
+{
+	Vec2 direction = GetRandomDirection();
+	m_vDir = direction;
+
+	if (m_velocity) {
+		m_velocity->SetVelocity(m_vDir * m_blockSpeed); // BLOCK_SPEED는 속도 상수
+	}
+}
+
 Vec2 Block::GetDirection(Collider* _other, const Vec2& point) {
 	if (!_other) {
 		return m_vDir; // Collider가 nullptr이면 기존 방향 유지
@@ -94,12 +104,6 @@ void Block::EnterCollision(Collider* _other)
 	if (name == L"DefendBlock") {
 		if (m_parent) {
 			m_parent->SetIsDefence(true);
-			Vec2 direction = GetRandomDirection();
-			m_vDir = direction;
-
-			if (m_velocity) {
-				m_velocity->SetVelocity(m_vDir * m_blockSpeed); // BLOCK_SPEED는 속도 상수
-			}
 		}
 	}
 	else if (name == L"Wall" || name == L"Block") {

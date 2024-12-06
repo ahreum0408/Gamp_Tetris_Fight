@@ -21,11 +21,15 @@ public:
 	}
 	void SetIsDefence(bool isDefence) {
 		m_defence = isDefence;
+		if (m_defence) {
+			StartFireBlock();
+		}
 	}
 	bool GetIsDefence() {
 		return m_defence;
 	}
 private:
+	void StartFireBlock();
 	Vec2 GetDirection(Collider* _other, const Vec2& point);
 	Vec2 GetRandomDirection();
 public:
