@@ -15,7 +15,8 @@ public:
     }
     bool StrikerUseSkill() {
         return _striker->UseSkill();
-    }
+    }	
+    int GetSkillCount() { return _striker->GetSkillCount(); }
 private:
     Striker* _striker;
 };
