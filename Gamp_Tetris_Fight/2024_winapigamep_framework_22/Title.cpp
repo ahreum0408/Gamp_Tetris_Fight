@@ -7,7 +7,7 @@
 
 Title::Title() :
 	m_pTex(nullptr), startTextTex(nullptr), gameruleTextTex(nullptr), exitTextTex(nullptr),
-	index(0), curIndex(0),
+	index(0), curIndex(1),
 	isGameRuleOn(false)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Title", L"Texture\\StartScene\\StartScene.bmp");
