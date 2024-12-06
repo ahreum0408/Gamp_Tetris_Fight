@@ -51,5 +51,5 @@ private:
 
     // GameOver
     bool isGameOver = false;
-    int endRow = 18;
+    int endRow = 17;
 };
