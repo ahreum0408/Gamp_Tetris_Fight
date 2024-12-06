@@ -15,11 +15,12 @@ Title::Title() :
 	startTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"StartTextOff", L"Texture\\StartScene\\StartTextOff.bmp");
 	gameruleTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GameRuleTextOff", L"Texture\\StartScene\\GameRuleTextOff.bmp");
 	exitTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"ExitTextOff", L"Texture\\StartScene\\ExitTextOff.bmp");
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"UIClick", L"Sound\\UIClick.wav", false);
 }
 
 Title::~Title()
 {
-	GET_SINGLE(ResourceManager)->LoadSound(L"UIClick", L"Sound\\UIClick.wav", false);
 }
 
 void Title::Update()

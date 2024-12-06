@@ -29,6 +29,11 @@ Board::Board() :
     this->SetName(L"Block");
 
     AddFontResource(L"Font\\Galmuri11.ttf");
+
+    // Sound
+    GET_SINGLE(ResourceManager)->LoadSound(L"BlockBreak", L"Sound\\BlockBreak.wav", false);
+    GET_SINGLE(ResourceManager)->LoadSound(L"BlockDown", L"Sound\\BlockDown.wav", false);
+    GET_SINGLE(ResourceManager)->LoadSound(L"BigBlockDown", L"Sound\\BigBlockDown.wav", false);
 }
 
 Board::~Board() 
@@ -151,6 +156,7 @@ void Board::Update()
             if (GET_SINGLE(PlayerManager)->StrikerUseSkill()) {
                 isSkill = true;
                 currentMoveDownDelay = 0;
+                GET_SINGLE(ResourceManager)->Play(L"BigBlockDown");
             }
             else {
                 cout << "you can't use skill" << endl;
@@ -166,6 +172,7 @@ void Board::Update()
 
                 // 1. ºí·° ½×°í
                 BuildBlock(currentBlock);
+                if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
                 if (isGameOver) return;
                 isSkill = false;
                 // 2. ÁÙ Ã¡´ÂÁö °Ë»ç
@@ -211,10 +218,7 @@ void Board::BuildBlock(Block_Parent* blockParent)
         if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
         {
             if (boardVec[row][col] == nullptr)
-            {
-                cout << row << col << endl;
                 boardVec[row][col] = block;
-            }
         }
     }
 }
@@ -248,6 +252,8 @@ void Board::RemoveRow(int row)
         GET_SINGLE(EventManager)->DeleteObject(boardVec[row][col]);
         boardVec[row][col] = nullptr;
     }
+
+    GET_SINGLE(ResourceManager)->Play(L"BlockBreak");
 
     if (++skillCnt == canSkillCnt)
     {
