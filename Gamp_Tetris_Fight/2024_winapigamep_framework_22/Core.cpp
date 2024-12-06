@@ -86,7 +86,7 @@ void Core::MainUpdate()
 void Core::MainRender()
 {
 	// 1. clear
-	::PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
+	::PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACKNESS);
 	// 2. Render
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
 	// 3. display	
