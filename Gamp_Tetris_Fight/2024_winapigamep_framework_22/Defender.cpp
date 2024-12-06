@@ -15,7 +15,7 @@
 #include "GameScene.h"
 #include "SceneManager.h"
 
-Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(4), m_isGrounded(false) {
+Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(3), m_isGrounded(false) {
     m_pCollider->SetSize({ 35,40 });
     m_pCollider->SetOffSetPos({ 2,0 });
     m_pCollider->SetIsTrigger(false);
