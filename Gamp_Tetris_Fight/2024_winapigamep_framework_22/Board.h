@@ -19,7 +19,7 @@ public:
     void MoveBlocksDown(int row); // 위 블록을 아래로 이동
 
     bool CheckFloor(const std::vector<Block*>& blocks) const; // 고정할 지 않할지 충돌
-    bool CheckClampRotat(Block_Parent* block); // 돌 때 체크
+    bool CheckClampRotat(Block_Parent* blockParent); // 돌 때 체크
     bool CheckClampLeft(const std::vector<Block*>& blocks) const; // 양옆 충돌
     bool CheckClampRight(const std::vector<Block*>& blocks) const; // 양옆 충돌
     bool ThereIsBlock(const Block* block, int X = 0, int Y = 0) const;
@@ -52,5 +52,5 @@ private:
 
     // GameOver
     bool isGameOver = false;
-    int endRow = 17;
+    int endRow = 18;
 };

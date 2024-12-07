@@ -2,14 +2,17 @@
 #include "GameOver.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "PlayerManager.h"
 
 GameOver::GameOver() :
 	m_pTex(nullptr), retryTextTex(nullptr), exitTextTex(nullptr),
-	curIndex(1)
+	curIndex(0)
 {
 	// 둘 중 누가 이겼는지 빨간 디노인지
-	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\RedDinoWin.bmp");
+	if (GET_SINGLE(PlayerManager)->GetWiner())
+		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\RedDinoWin.bmp");
+	else
+		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
 
 	retryTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RetryTextOff", L"Texture\\GameOverScene\\RetryTextOff.bmp");
 	exitTextTex = GET_SINGLE(ResourceManager)->TextureLoad(L"ExitTextOff", L"Texture\\StartScene\\ExitTextOff.bmp");
