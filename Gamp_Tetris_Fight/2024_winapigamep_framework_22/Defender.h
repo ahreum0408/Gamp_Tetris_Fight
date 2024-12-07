@@ -3,6 +3,7 @@
 #include "StateMachine.h"
 #include "Animator.h"
 #include "Velocity.h"
+#include "Block.h"
 
 class Defender : public Player
 {
@@ -24,6 +25,8 @@ public:
 	bool IsJumpKeyPressed() const { return GET_KEYDOWN(KEY_TYPE::UP) && !m_isBlockAbove; }
 	bool IsFalling() const { return !m_isGrounded && GetPos().y < m_beforePos.y; }
 	void CreateDefendBlock();
+	// Á×´ÂÁö Ã¼Å©
+	void DieCheck(Block* block);
 public:
 	void PlayIdleAnimation() { m_animator->PlayAnimation(L"RedDinoIdle", true); }
 	void PlayJumpAnimation() { m_animator->PlayAnimation(L"RedDinoJump", true); }

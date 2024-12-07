@@ -8,7 +8,7 @@
 #include "EventManager.h"
 #include "Block.h"
 
-Striker::Striker() : m_skillCount(0) {
+Striker::Striker() : m_skillCount(50) {
 	this->AddComponent<CameraComponent>();
 
 	m_pCollider->SetSize({ 35,40 });

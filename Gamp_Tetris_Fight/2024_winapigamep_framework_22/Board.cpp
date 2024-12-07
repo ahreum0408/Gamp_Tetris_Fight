@@ -218,7 +218,8 @@ void Board::BuildBlock(Block_Parent* blockParent)
             GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
             return;
         }
-
+        block->SetIsBulit(true);
+        GET_SINGLE(PlayerManager)->DefenderDieCheck(block);
         if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
         {
             if (boardVec[row][col] == nullptr)
