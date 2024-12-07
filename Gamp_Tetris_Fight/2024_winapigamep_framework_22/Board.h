@@ -38,7 +38,7 @@ private:
     // Skill
     bool isSkill = false;
     int skillCnt = 0;
-    int canSkillCnt = 4;
+    int canSkillCnt = 2;
 
     Texture* m_pTex;
     HFONT myFont;
