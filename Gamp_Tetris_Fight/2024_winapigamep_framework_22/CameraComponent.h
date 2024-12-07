@@ -17,6 +17,7 @@ private:
 	void ShakeCamera();
 private:
 	Vec2* m_pPos;
+	Vec2 m_defaultPos;
 	float time;
 	int m_shakeCount = 0;
 };

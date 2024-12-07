@@ -7,6 +7,7 @@
 
 CameraComponent::CameraComponent()
 {
+	m_defaultPos = GET_SINGLE(Camera)->GetCameraPos();
 }
 
 CameraComponent::~CameraComponent()
@@ -22,7 +23,12 @@ void CameraComponent::LateUpdate()
 
 		if (time >= 0.05f) // 0.05초 간격으로 흔들기
 		{
-			ShakeCamera();
+			if (m_shakeCount == 1) {
+				GET_SINGLE(Camera)->SetCameraPos(m_defaultPos);
+			}
+			else {
+				ShakeCamera();
+			}
 			time = 0.0f; // 타이머 초기화
 			m_shakeCount--; // 흔들림 횟수 감소
 		}
@@ -50,5 +56,5 @@ void CameraComponent::ShakeCamera()
 }
 void CameraComponent::StartShake()
 {
-	m_shakeCount = 5; // 흔들기 횟수 5번으로 설정
+	m_shakeCount = 5 + 1; // 흔들기 횟수 5번으로 설정
 }
