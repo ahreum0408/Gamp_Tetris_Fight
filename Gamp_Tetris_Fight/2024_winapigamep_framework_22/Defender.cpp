@@ -9,7 +9,6 @@
 #include "JumpState.h"
 #include "FallState.h"
 #include "ResourceManager.h"
-#include "Animator.h"
 #include "Velocity.h"
 #include "DefenceBlock.h"
 #include "GameScene.h"

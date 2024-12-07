@@ -7,9 +7,13 @@ class PlayerManager
     DECLARE_SINGLE(PlayerManager);
 public:
     void SetStriker(Striker* striker) { _striker = striker; }
+    void SetDefender(Defender* defender) { _defender = defender; }
 
     Striker* GetStriker() { return _striker; }
-
+    Defender* GetDefender() { return _defender; }
+    void ShakeCamera() {
+        _striker->ShakeCamera();
+    }
     void AddStrikerSkillCount() {
         _striker->PlusSkillCount();
     }
@@ -20,10 +24,11 @@ public:
     void SetDefenerWiner(bool isWin) {
         _isDefenderWiner = isWin;
     }
-    bool GetWinwe() {
+    bool GetWiner() {
         return _isDefenderWiner;
     }
 private:
     Striker* _striker;
+    Defender* _defender;
     bool _isDefenderWiner = false;
 };

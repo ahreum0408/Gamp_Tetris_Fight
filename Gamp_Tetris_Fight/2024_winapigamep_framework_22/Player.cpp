@@ -1,11 +1,9 @@
 #include "pch.h"
 #include "Player.h"
-#include "TimeManager.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "Collider.h"
 #include "Animator.h"
-#include "Striker.h"
 #include "Velocity.h"
 
 Player::Player() : m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)

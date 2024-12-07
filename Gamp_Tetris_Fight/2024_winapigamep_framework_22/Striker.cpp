@@ -4,7 +4,6 @@
 #include "InputManager.h"
 #include "Collider.h"
 #include "ResourceManager.h"
-#include "Animator.h"
 #include "PlayerManager.h"
 #include "EventManager.h"
 
@@ -60,6 +59,10 @@ bool Striker::UseSkill()
 		return true;
 	}
 	return false;
+}
+void Striker::ShakeCamera()
+{
+	m_camera->StartShake();
 }
 void Striker::Update() {
 	Vec2 vPos = GetPos();

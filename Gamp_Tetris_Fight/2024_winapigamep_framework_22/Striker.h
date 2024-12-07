@@ -23,6 +23,7 @@ protected:
 	bool CanUseSkill();
 public:
 	bool UseSkill();
+	void ShakeCamera();
 private:
 	int m_skillCount = 0;
 private:

@@ -4,11 +4,11 @@
 #include "ResourceManager.h"
 #include "EventManager.h"
 #include "Collider.h"
-#include <format>
 #include "Camera.h"
 #include "Velocity.h"
 #include "Block_Parent.h"
-
+#include "PlayerManager.h"
+#include <format>
 
 Block::Block(wstring path, Block_Parent* parent) :
 	m_vDir(1.f, 1.f),
@@ -122,6 +122,7 @@ void Block::EnterCollision(Collider* _other)
 		}
 	}
 	else if (name == L"Wall" || name == L"Block") {
+		GET_SINGLE(PlayerManager)->ShakeCamera();
 		cout << "블럭 방향 변경" << endl;
 		Vec2 newDirection = GetDirection(_other, m_collider->GetPosition());
 		m_vDir = newDirection;
