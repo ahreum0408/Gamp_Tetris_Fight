@@ -82,10 +82,11 @@ void Defender::EnterCollision(Collider* _other) {
     }
     CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
     if (direction == CollisionDirection::Top) {
+        cout << _other->GetOwner();
         Block* block = dynamic_cast<Block*>(_other->GetOwner());
         if (!block->GetIsDefence()) {
             cout << "수비수 배패.." << endl;
-            GET_SINGLE(PlayerManager)->SetDefenerWiner(true);
+            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
             GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
         }
     }

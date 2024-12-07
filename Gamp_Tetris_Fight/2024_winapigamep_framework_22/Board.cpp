@@ -213,6 +213,9 @@ void Board::BuildBlock(Block_Parent* blockParent)
         if (row == boardHeight - endRow)
         {
             isGameOver = true;
+            cout << "공격수 배패.." << endl;
+            GET_SINGLE(PlayerManager)->SetDefenerWiner(true);
+            //GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
             return;
         }
 
@@ -301,26 +304,50 @@ bool Board::CheckFloor(const std::vector<Block*>& blocks) const
     return false;
 }
 
-bool Board::CheckClampRotat(Block_Parent* block)
+bool Board::CheckClampRotat(Block_Parent* blockParent)
 {
-    for (const Block* block : block->GetBlocks())
+    for (const Block* block : blockParent->GetBlocks())
     {
         float x = block->GetPos().x;
         if (x - BLOCK_SIZE / 2 < GetBoardOrigin().x ||
             ThereIsBlock(block))
         {
-            if (ThereIsBlock(block, 1))
-                return false; // 도는거 취소
-            else
-                currentBlock->MoveSide(false);
+            for (const Block* block : blockParent->GetBlocks())
+            {
+                if (ThereIsBlock(block, 1) || ThereIsBlock(block))
+                {
+                    cout << " 취소 " << endl;
+                    return false; // 도는거 취소
+                }
+            }
+            cout << " MoveSide " << endl;
+            currentBlock->MoveSide(false);
         }
         else if (x + BLOCK_SIZE / 2 > GetBoardOrigin().x + boardWidth * BLOCK_SIZE ||
             ThereIsBlock(block))
         {
-            if (ThereIsBlock(block, -1))
-                return false; // 도는거 취소
-            else
-                currentBlock->MoveSide(true);
+            //if (ThereIsBlock(block, -1) || ThereIsBlock(block))
+
+            //{
+            //    cout << " 취소 " << endl;
+            //    return false; // 도는거 취소
+            //}
+            //else
+            //{
+            //    cout << " MoveSide " << endl;
+            //    currentBlock->MoveSide(true);
+            //    //continue;
+            //}
+            for (const Block* block : blockParent->GetBlocks())
+            {
+                if (ThereIsBlock(block, -1) || ThereIsBlock(block))
+                {
+                    cout << " 취소 " << endl;
+                    return false; // 도는거 취소
+                }
+            }
+            cout << " MoveSide " << endl;
+            currentBlock->MoveSide(true);
         }
     }
 
