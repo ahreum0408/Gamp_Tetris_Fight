@@ -8,7 +8,7 @@
 #include "EventManager.h"
 #include "Block.h"
 
-Striker::Striker() : m_skillCount(0) {
+Striker::Striker() : m_skillCount(50) {
 	this->AddComponent<CameraComponent>();
 
 	m_pCollider->SetSize({ 35,40 });
@@ -35,7 +35,7 @@ void Striker::EnterCollision(Collider* _other)
 		if (block->GetIsDefence()) {
 			cout << "공격수 배패.." << endl;
 			GET_SINGLE(PlayerManager)->SetDefenerWiner(true);
-			//GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+			GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
 		}
 	}
 }

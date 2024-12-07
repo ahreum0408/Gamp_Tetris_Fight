@@ -25,8 +25,14 @@ public:
 			StartFireBlock();
 		}
 	}
+	void SetIsBulit(bool isBulit) {
+		m_built = isBulit;
+	}
 	bool GetIsDefence() {
 		return m_defence;
+	}
+	bool GetIsBulit() {
+		return m_built;
 	}
 private:
 	void StartFireBlock();
@@ -38,6 +44,7 @@ public:
 	virtual void ExitCollision(Collider* _other);
 private:
 	bool m_defence = false;
+	bool m_built = false;
 	Vec2 m_vDir;
 	Texture* m_pTex;
 	Block_Parent* m_parent;

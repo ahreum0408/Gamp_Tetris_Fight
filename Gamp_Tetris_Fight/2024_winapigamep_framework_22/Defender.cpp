@@ -29,8 +29,6 @@ Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpC
     m_animator->CreateAnimation(L"RedDinoFall", m_pTex, Vec2(432.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 1, 0.1f);
 
     m_velocity = GetComponent<Velocity>();
-    //cout << "defender : ";
-    //cout << m_pCollider->GetOwner() << endl;
 
     m_stateMachine->ChangeState(new IdleState());
 }
@@ -69,7 +67,6 @@ void Defender::Update() {
 
     // 위치 업데이트
     vPos.y += m_vVelocity.y * fDT;
-
     SetPos(vPos);
     Player::Update();
 }
@@ -80,19 +77,28 @@ void Defender::EnterCollision(Collider* _other) {
         m_vVelocity.y = 0; // 중력 가속도를 초기화
         SetJumpCount();
     }
-    CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
-    if (direction == CollisionDirection::Top) {
-        cout << _other->GetOwner();
-        Block* block = dynamic_cast<Block*>(_other->GetOwner());
-        if (!block->GetIsDefence()) {
-            cout << "수비수 배패.." << endl;
-            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
-        }
-    }
+    //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
+    //if (direction == CollisionDirection::Top) {
+    //    cout << "enter.." << endl;
+    //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
+    //    if (!block->GetIsDefence() || block->GetIsBulit()) {
+    //        cout << "수비수 배패.." << endl;
+    //        GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+    //        GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //    }
+    //}
 }
 void Defender::StayCollision(Collider* _other)
 {
+    //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
+    //if (direction == CollisionDirection::Top) {
+    //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
+    //    if (!block->GetIsDefence() || block->GetIsBulit()) {
+    //        cout << "수비수 배패.." << endl;
+    //        GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+    //        GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //    }
+    //}
 }
 void Defender::ExitCollision(Collider* _other)
 {
@@ -124,6 +130,20 @@ void Defender::CreateDefendBlock()
     Vec2 blockPos = defenderPos;
     blockPos.y -= 50.f; // Defender 바로 위에 생성
     block->SetPos(blockPos);
+}
+void Defender::DieCheck(Block* block)
+{
+    Vec2 vPos = GetPos();
+    Vec2 targetPos = block->GetPos();
+    if (vPos.x >= targetPos.x - BLOCK_SIZE / 2 && vPos.x <= targetPos.x + BLOCK_SIZE / 2
+        && vPos.y >= targetPos.y - BLOCK_SIZE / 2 && vPos.y <= targetPos.y - BLOCK_SIZE / 2)
+    {
+        if (!block->GetIsDefence() || block->GetIsBulit()) {
+            cout << "수비수 배패.." << endl;
+            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+        }
+    }
 }
 bool Defender::IsGround(Collider* other) // block이 바닥일때, 바닥일때 
 {
