@@ -116,7 +116,7 @@ void Board::Render(HDC _hdc)
 void Board::Update()
 {
     if (isGameOver) return;
-    if (currentBlock->IsAllChildLive()) {
+    if (currentBlock->IsAllChildAlive()) {
         currentMoveDownDelay = moveDownDelay;
 
         currentBlock = nullptr; // 사실 안해도 되는데 이거 안해주면 메모리가 빌거야

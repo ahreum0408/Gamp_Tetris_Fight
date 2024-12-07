@@ -21,7 +21,7 @@ public:
 
     void SetIsDefence(bool isDefence) override;
     bool GetIsDefence() override;
-    bool IsAllChildLive() override;
+    bool IsAllChildAlive() override;
 public:
     void SetDir(Vec2 _dir)
     {

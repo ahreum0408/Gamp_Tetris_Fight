@@ -103,7 +103,7 @@ bool Block_I::GetIsDefence()
 	return false;
 }
 
-bool Block_I::IsAllChildLive()
+bool Block_I::IsAllChildAlive()
 {
 	for (auto block : blockVec) {
 		if (!block->GetIsDead()) {

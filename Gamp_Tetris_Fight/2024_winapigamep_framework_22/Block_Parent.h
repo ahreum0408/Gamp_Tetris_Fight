@@ -23,5 +23,5 @@ public:
     virtual void SetIsDefence(bool isDefence) abstract;
     virtual bool GetIsDefence() abstract;
 
-    virtual bool IsAllChildLive() abstract;
+    virtual bool IsAllChildAlive() abstract;
 };

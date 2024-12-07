@@ -20,7 +20,7 @@ public:
 
     void SetIsDefence(bool isDefence) override;
     bool GetIsDefence() override;
-    bool IsAllChildLive() override;
+    bool IsAllChildAlive() override;
 private:
     void SetBlockPosition();
 public:
