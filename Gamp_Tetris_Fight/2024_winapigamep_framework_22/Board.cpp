@@ -215,7 +215,7 @@ void Board::BuildBlock(Block_Parent* blockParent)
             isGameOver = true;
             cout << "공격수 배패.." << endl;
             GET_SINGLE(PlayerManager)->SetDefenerWiner(true);
-            //GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
             return;
         }
 
@@ -326,18 +326,6 @@ bool Board::CheckClampRotat(Block_Parent* blockParent)
         else if (x + BLOCK_SIZE / 2 > GetBoardOrigin().x + boardWidth * BLOCK_SIZE ||
             ThereIsBlock(block))
         {
-            //if (ThereIsBlock(block, -1) || ThereIsBlock(block))
-
-            //{
-            //    cout << " 취소 " << endl;
-            //    return false; // 도는거 취소
-            //}
-            //else
-            //{
-            //    cout << " MoveSide " << endl;
-            //    currentBlock->MoveSide(true);
-            //    //continue;
-            //}
             for (const Block* block : blockParent->GetBlocks())
             {
                 if (ThereIsBlock(block, -1) || ThereIsBlock(block))
@@ -448,7 +436,7 @@ void Board::CreateBlock()
     float boardStartY = GetPos().y - (boardHeight * BLOCK_SIZE) / 2;
 
     float blockStartX = GetPos().x - BLOCK_SIZE * 2;
-    float blockStartY = boardStartY - 20;
+    float blockStartY = boardStartY + BLOCK_SIZE - 20;
 
     block->SetPos({ blockStartX, blockStartY - BLOCK_SIZE / 2 });
     currentBlock = block;

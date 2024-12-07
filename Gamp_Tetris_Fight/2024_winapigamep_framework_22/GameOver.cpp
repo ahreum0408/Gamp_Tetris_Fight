@@ -6,7 +6,7 @@
 
 GameOver::GameOver() :
 	m_pTex(nullptr), retryTextTex(nullptr), exitTextTex(nullptr),
-	curIndex(0)
+	index(0), curIndex(1)
 {
 	// 둘 중 누가 이겼는지 빨간 디노인지
 	if (GET_SINGLE(PlayerManager)->GetWiner())

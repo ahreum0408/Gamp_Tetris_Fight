@@ -29,8 +29,6 @@ Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpC
     m_animator->CreateAnimation(L"RedDinoFall", m_pTex, Vec2(432.f, 0.f), Vec2(48.f, 48.f), Vec2(48.f, 0.f), 1, 0.1f);
 
     m_velocity = GetComponent<Velocity>();
-    //cout << "defender : ";
-    //cout << m_pCollider->GetOwner() << endl;
 
     m_stateMachine->ChangeState(new IdleState());
 }
@@ -82,7 +80,6 @@ void Defender::EnterCollision(Collider* _other) {
     }
     CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
     if (direction == CollisionDirection::Top) {
-        cout << _other->GetOwner();
         Block* block = dynamic_cast<Block*>(_other->GetOwner());
         if (!block->GetIsDefence()) {
             cout << "수비수 배패.." << endl;

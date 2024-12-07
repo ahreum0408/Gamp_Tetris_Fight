@@ -1,2 +1,23 @@
-﻿  FallState.cpp
-  2024_winapigamep_framework_22.vcxproj -> C:\Users\USER\Desktop\Gamp_Tetris_Fight\Gamp_Tetris_Fight\Output\build_debug\2024_winapigamep_framework_22.exe
+﻿  Board.cpp
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(101,57): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(104,68): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(104,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(105,74): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(105,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(106,76): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(106,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(107,72): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(107,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(109,68): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(109,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(110,98): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(110,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(111,82): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(111,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(112,71): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(112,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(210,17): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(211,17): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(385,13): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\Board.cpp(386,13): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  2024_winapigamep_framework_22.vcxproj -> C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\Output\build_debug\2024_winapigamep_framework_22.exe

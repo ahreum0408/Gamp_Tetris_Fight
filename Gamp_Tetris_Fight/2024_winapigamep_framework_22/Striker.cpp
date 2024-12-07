@@ -35,7 +35,7 @@ void Striker::EnterCollision(Collider* _other)
 		if (block->GetIsDefence()) {
 			cout << "공격수 배패.." << endl;
 			GET_SINGLE(PlayerManager)->SetDefenerWiner(true);
-			//GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+			GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
 		}
 	}
 }

@@ -33,7 +33,7 @@ protected:
 
 	// 플레이어 크기 만큼 더 조절
 	const float minX = 300 + 16;
-	const float maxX = 700 - 18;
+	const float maxX = 680;
 
 	bool m_canMoveLeft = true;
 	bool m_canMoveRight = true;
