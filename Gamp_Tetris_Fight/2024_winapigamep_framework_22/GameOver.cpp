@@ -21,6 +21,7 @@ GameOver::GameOver() :
 
 GameOver::~GameOver()
 {
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::EFFECT);
 }
 
 void GameOver::Update()

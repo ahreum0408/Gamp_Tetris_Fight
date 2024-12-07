@@ -421,7 +421,7 @@ void Board::CreateBlock()
     float boardStartY = GetPos().y - (boardHeight * BLOCK_SIZE) / 2;
 
     float blockStartX = GetPos().x - BLOCK_SIZE * 2;
-    float blockStartY = boardStartY + BLOCK_SIZE * 4 - 20;
+    float blockStartY = boardStartY - 20;
 
     block->SetPos({ blockStartX, blockStartY - BLOCK_SIZE / 2 });
     currentBlock = block;
@@ -433,37 +433,30 @@ void Board::CreateBlock()
     switch (nextBlock)
     {
     case BLOCK_TYPE::BLOCK_I:
-        //cout << "I" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockI", L"Texture\\Complete version\\Skyblue.bmp");
         break;
     case BLOCK_TYPE::BLOCK_J:
-        //cout << "J" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockJ", L"Texture\\Complete version\\Bule.bmp");
         break;
     case BLOCK_TYPE::BLOCK_L:
-        //cout << "L" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockL", L"Texture\\Complete version\\Orange.bmp");
         break;
     case BLOCK_TYPE::BLOCK_O:
-        //cout << "O" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockO", L"Texture\\Complete version\\Yellow.bmp");
         break;
     case BLOCK_TYPE::BLOCK_S:
-        //cout << "S" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockS", L"Texture\\Complete version\\Red.bmp");
         break;
     case BLOCK_TYPE::BLOCK_Z:
-        //cout << "Z" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockZ", L"Texture\\Complete version\\Green.bmp");
         break;
     case BLOCK_TYPE::BLOCK_T:
-        //cout << "T" << endl;
         nextBlockTex = GET_SINGLE(ResourceManager)->
             TextureLoad(L"NextBlockT", L"Texture\\Complete version\\Purple.bmp");
         break;
