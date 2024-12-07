@@ -13,6 +13,7 @@
 #include "Velocity.h"
 #include "DefenceBlock.h"
 #include "GameScene.h"
+#include "EventManager.h"
 #include "SceneManager.h"
 
 Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(3), m_isGrounded(false) {
@@ -56,9 +57,6 @@ void Defender::Update() {
     if (GET_KEYDOWN(KEY_TYPE::SPACE)) {
         UseSkill();
     }
-    if (GET_KEYDOWN(KEY_TYPE::Q)) {
-        GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
-    }
 
     m_stateMachine->Update();
 
@@ -84,7 +82,7 @@ void Defender::EnterCollision(Collider* _other) {
     CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
     if (direction == CollisionDirection::Top) {
         cout << "수비수 배패.." << endl;
-        //GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
+        GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
     }
 }
 void Defender::StayCollision(Collider* _other)

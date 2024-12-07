@@ -6,7 +6,7 @@
 #include "ResourceManager.h"
 #include "Animator.h"
 #include "PlayerManager.h"
-#include "SceneManager.h"
+#include "EventManager.h"
 
 Striker::Striker() : m_skillCount(0) {
 	this->AddComponent<CameraComponent>();
@@ -32,7 +32,7 @@ void Striker::EnterCollision(Collider* _other)
 	wstring name = _other->GetOwner()->GetName();
 	if (name == L"Block") {
 		cout << "공격수 배패.." << endl;
-		//GET_SINGLE(SceneManager)->LoadScene(L"GameOverScene");
+		GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
 	}
 }
 void Striker::StayCollision(Collider* _other)
