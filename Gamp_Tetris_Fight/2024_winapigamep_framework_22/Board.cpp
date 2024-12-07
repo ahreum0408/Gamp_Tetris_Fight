@@ -36,7 +36,7 @@ Board::Board() :
     GET_SINGLE(ResourceManager)->LoadSound(L"BigBlockDown", L"Sound\\BigBlockDown.wav", false);
 }
 
-Board::~Board() 
+Board::~Board()
 {
     ::DeleteObject(myFont);
 }
@@ -78,7 +78,7 @@ void Board::Render(HDC _hdc)
 
     {
         myFont = ::CreateFont(
-              20                       // 높이
+            20                       // 높이
             , 0                        // 폭 0이면 높이와 비례
             , 0                        // 글자 전체 기울기
             , 0                        // 기준선이 정해진 기울기
@@ -116,7 +116,12 @@ void Board::Render(HDC _hdc)
 void Board::Update()
 {
     if (isGameOver) return;
+    if (currentBlock->IsAllChildLive()) {
+        currentMoveDownDelay = moveDownDelay;
 
+        currentBlock = nullptr; // 사실 안해도 되는데 이거 안해주면 메모리가 빌거야
+        CreateBlock();
+    }
 #pragma region BlockMove
     if (currentBlock)
     {
@@ -164,7 +169,7 @@ void Board::Update()
         }
 
         // Block Down
-        if (moveDownTimer >= currentMoveDownDelay && currentBlock)
+        if (moveDownTimer >= currentMoveDownDelay)
         {
             if (CheckFloor(currentBlock->GetBlocks()))
             {
@@ -183,10 +188,6 @@ void Board::Update()
             }
             if (!currentBlock->GetIsDefence()) {
                 currentBlock->MoveDown(); // 이게 바닥에 내리는거
-            }
-            else {
-                //GET_SINGLE(EventManager)->DeleteObject(currentBlock);
-                currentBlock = nullptr; // 사실 안해도 되는데 이거 안해주면 메모리가 빌거야
             }
             moveDownTimer = 0;
         }

@@ -173,6 +173,16 @@ bool Block_Z::GetIsDefence()
 	return false;
 }
 
+bool Block_Z::IsAllChildLive()
+{
+	for (auto block : blockVec) {
+		if (!block->GetIsDead()) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void Block_Z::EnterCollision(Collider* _other)
 {
 }

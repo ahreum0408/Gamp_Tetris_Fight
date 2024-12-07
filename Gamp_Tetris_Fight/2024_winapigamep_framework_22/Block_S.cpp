@@ -107,6 +107,16 @@ bool Block_S::GetIsDefence()
 	return false;
 }
 
+bool Block_S::IsAllChildLive()
+{
+	for (auto block : blockVec) {
+		if (!block->GetIsDead()) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void Block_S::SetBlockPosition()
 {
 	int index = 0;
