@@ -15,7 +15,6 @@ Collider::Collider()
     , m_ID(m_sNextID++)
 {
 }
-
 Collider::~Collider()
 {
 }
@@ -26,7 +25,6 @@ void Collider::LateUpdate()
     Vec2 vPos = pOwner->GetPos();
     m_vLatePos = vPos + m_vOffsetPos;
 }
-
 void Collider::Render(HDC _hdc)
 {
     /*PEN_TYPE ePen = PEN_TYPE::GREEN;
@@ -73,7 +71,6 @@ void Collider::EnterCollision(Collider* _other)
     GetOwner()->EnterCollision(_other);
     m_showDebug = true;
 }
-
 void Collider::StayCollision(Collider* _other)
 {
     wstring name = _other->GetOwner()->GetName();
@@ -109,14 +106,13 @@ void Collider::StayCollision(Collider* _other)
     GetOwner()->StayCollision(_other);
     m_showDebug = true;
 }
-
 void Collider::ExitCollision(Collider* _other)
 {
     m_showDebug = false;
     GetOwner()->ExitCollision(_other);
 }
 
-CollisionDirection Collider::GetCollisionDirection(const Vec2& objectPos, const Vec2& otherPos) {
+CollisionDirection Collider::GetCollisionDirection(const Vec2& objectPos, const Vec2& otherPos) const {
     float deltaX = otherPos.x - objectPos.x;
     float deltaY = otherPos.y - objectPos.y;
 
@@ -132,29 +128,19 @@ CollisionDirection Collider::GetCollisionDirection(const Vec2& objectPos, const 
 }
 Vec2 Collider::GetNormal(const Vec2& collisionPoint) const {
     Vec2 center = GetPosition(); // Collider의 중심 좌표
-    Vec2 size = GetSize();       // Collider의 크기 (폭, 높이)
+    CollisionDirection direction = GetCollisionDirection(center, collisionPoint);
 
-    // 충돌 지점이 상/하/좌/우 어느 면과 가까운지 확인
-    float left = center.x - size.x / 2;
-    float right = center.x + size.x / 2;
-    float top = center.y - size.y / 2;
-    float bottom = center.y + size.y / 2;
-
-    // 충돌 지점이 상단 근처
-    if (fabs(collisionPoint.y - top) < fabs(collisionPoint.x - left) &&
-        fabs(collisionPoint.y - top) < fabs(collisionPoint.x - right)) {
+    // CollisionDirection에 따라 적절한 법선 벡터 반환
+    switch (direction) {
+    case CollisionDirection::Top:
         return Vec2(0, -1); // 위쪽 법선
-    }
-    // 충돌 지점이 하단 근처
-    if (fabs(collisionPoint.y - bottom) < fabs(collisionPoint.x - left) &&
-        fabs(collisionPoint.y - bottom) < fabs(collisionPoint.x - right)) {
-        return Vec2(0, 1); // 아래쪽 법선
-    }
-    // 충돌 지점이 좌측 근처
-    if (fabs(collisionPoint.x - left) < fabs(collisionPoint.y - top) &&
-        fabs(collisionPoint.x - left) < fabs(collisionPoint.y - bottom)) {
+    case CollisionDirection::Bottom:
+        return Vec2(0, 1);  // 아래쪽 법선
+    case CollisionDirection::Left:
         return Vec2(-1, 0); // 왼쪽 법선
+    case CollisionDirection::Right:
+        return Vec2(1, 0);  // 오른쪽 법선
+    default:
+        return Vec2(0, 0);  // 안전을 위해 기본값 반환
     }
-    // 충돌 지점이 우측 근처
-    return Vec2(1, 0); // 오른쪽 법선
 }
