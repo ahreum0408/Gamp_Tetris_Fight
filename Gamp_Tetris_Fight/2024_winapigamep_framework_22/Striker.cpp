@@ -52,7 +52,7 @@ bool Striker::UseSkill()
 	if (CanUseSkill()) {
 		if (m_camera != nullptr) {
 			cout << "shake camera" << endl;
-			m_camera->ShakeCamera();
+			m_camera->StartShake();
 		}
 		m_skillCount--;
 		cout << "±ïÀÓ - " << m_skillCount << endl;

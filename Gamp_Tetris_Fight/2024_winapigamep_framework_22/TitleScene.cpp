@@ -4,9 +4,6 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-//#include "Enemy.h"
-//#include "CollisionManager.h"
-//#include "ResourceManager.h"
 
 #include "Striker.h"
 #include "Defender.h"
@@ -24,7 +21,7 @@ void TitleScene::Init()
 		Player* pPlayer1 = dynamic_cast<Player*>(oPlayer1);
 		pPlayer1->SetKey(KEY_TYPE::A, KEY_TYPE::D); // 이동 방향 설정
 
-		AddObject(oPlayer1, LAYER::PLAYER); // 레이어도 바꿔야할겅ㅁ
+		AddObject(oPlayer1, LAYER::DEFENDER); // 레이어도 바꿔야할겅ㅁ
 	}
 	{
 		Object* oPlayer2 = new Defender;
@@ -35,22 +32,20 @@ void TitleScene::Init()
 		pPlayer2->SetKey(KEY_TYPE::LEFT, KEY_TYPE::RIGHT); // 이동 방향 설정
 		pPlayer2->SetName(L"Player");
 
-		AddObject(oPlayer2, LAYER::PLAYER);// 레이어도 바꿔야할겅ㅁ
+		AddObject(oPlayer2, LAYER::DEFENDER);// 레이어도 바꿔야할겅ㅁ
 	}
 	// Bottom Wall
 	Wall* bottomWall = new Wall;
 	bottomWall->SetPos({ SCREEN_WIDTH / 2, 600 });
 	bottomWall->SetSize({ 500, 50 });
-	AddObject(bottomWall, LAYER::Wall); 
+	AddObject(bottomWall, LAYER::Wall);
 	bottomWall->SetName(L"Wall");
 
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::Wall);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::BLOCK);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::DEFENDER, LAYER::Wall);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::DEFENDER, LAYER::BLOCK);
 }
 
 void TitleScene::Update()
 {
 	Scene::Update();
-	/*if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");*/
 }
