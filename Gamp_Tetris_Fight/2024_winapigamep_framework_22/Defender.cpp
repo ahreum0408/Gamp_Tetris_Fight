@@ -16,6 +16,7 @@
 #include "EventManager.h"
 #include "SceneManager.h"
 #include "Block.h"
+#include "PlayerManager.h"
 
 Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(3), m_isGrounded(false) {
     m_pCollider->SetSize({ 35,38 });
@@ -85,6 +86,7 @@ void Defender::EnterCollision(Collider* _other) {
         Block* block = dynamic_cast<Block*>(_other->GetOwner());
         if (!block->GetIsDefence()) {
             cout << "수비수 배패.." << endl;
+            GET_SINGLE(PlayerManager)->SetDefenerWiner(true);
             GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
         }
     }

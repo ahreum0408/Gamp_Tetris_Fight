@@ -32,6 +32,7 @@ void Striker::EnterCollision(Collider* _other)
 	wstring name = _other->GetOwner()->GetName();
 	if (name == L"Block") {
 		cout << "공격수 배패.." << endl;
+		GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
 		GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
 	}
 }

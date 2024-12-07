@@ -15,8 +15,15 @@ public:
     }
     bool StrikerUseSkill() {
         return _striker->UseSkill();
-    }	
+    }
     int GetSkillCount() { return _striker->GetSkillCount(); }
+    void SetDefenerWiner(bool isWin) {
+        _isDefenderWiner = isWin;
+    }
+    bool GetWinwe() {
+        return _isDefenderWiner;
+    }
 private:
     Striker* _striker;
+    bool _isDefenderWiner = false;
 };
