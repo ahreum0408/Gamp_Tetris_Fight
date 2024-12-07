@@ -103,9 +103,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
@@ -267,9 +264,6 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">

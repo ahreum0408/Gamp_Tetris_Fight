@@ -216,7 +216,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Title.h" />
-    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Velocity.h" />
     <ClInclude Include="Wall.h" />
@@ -269,7 +268,6 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
