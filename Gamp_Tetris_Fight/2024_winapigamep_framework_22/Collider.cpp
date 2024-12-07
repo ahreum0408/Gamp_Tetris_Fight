@@ -41,7 +41,7 @@ void Collider::Render(HDC _hdc)
 void Collider::EnterCollision(Collider* _other)
 {
     wstring name = _other->GetOwner()->GetName();
-    if (name == L"Block")
+    if (name == L"Block" && !isTrigger)
     {
         Velocity* velocity = GetOwner()->GetComponent<Velocity>();
         if (velocity)
@@ -77,7 +77,7 @@ void Collider::EnterCollision(Collider* _other)
 void Collider::StayCollision(Collider* _other)
 {
     wstring name = _other->GetOwner()->GetName();
-    if (name == L"Block")
+    if (name == L"Block" && !isTrigger)
     {
         Velocity* velocity = GetOwner()->GetComponent<Velocity>();
         if (velocity)

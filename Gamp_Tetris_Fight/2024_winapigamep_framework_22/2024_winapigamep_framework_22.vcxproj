@@ -186,7 +186,6 @@
     <ClInclude Include="DefenceBlock.h" />
     <ClInclude Include="Defender.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FallState.h" />
@@ -203,7 +202,6 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
-    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -242,7 +240,6 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DefenceBlock.cpp" />
     <ClCompile Include="Defender.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FallState.cpp" />
     <ClCompile Include="GameOver.cpp" />
@@ -257,7 +254,6 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
-    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />

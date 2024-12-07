@@ -54,9 +54,9 @@ void Block::Update()
 	}
 
 	// 블럭이 화면 하단을 벗어나면 삭제
-	if (vPos.y <= 0) {
+	if (vPos.y <= -100) {
+		cout << "블럭삭제" << endl;
 		GET_SINGLE(EventManager)->DeleteObject(this);
-		cout << "블럭 삭제" << endl;
 	}
 }
 
@@ -121,14 +121,16 @@ void Block::EnterCollision(Collider* _other)
 			m_parent->SetIsDefence(true);
 		}
 	}
-	else if (name == L"Wall" || name == L"Block") {
-		GET_SINGLE(PlayerManager)->ShakeCamera();
-		cout << "블럭 방향 변경" << endl;
-		Vec2 newDirection = GetDirection(_other, m_collider->GetPosition());
-		m_vDir = newDirection;
+	else if (GetIsDefence()) {
+		if (name == L"Wall" || name == L"Block") {
+			GET_SINGLE(PlayerManager)->ShakeCamera();
+			cout << "블럭 방향 변경" << endl;
+			Vec2 newDirection = GetDirection(_other, m_collider->GetPosition());
+			m_vDir = newDirection;
 
-		if (m_velocity) {
-			m_velocity->SetVelocity(m_vDir * m_blockSpeed); // BLOCK_SPEED는 속도 상수
+			if (m_velocity) {
+				m_velocity->SetVelocity(m_vDir * m_blockSpeed); // BLOCK_SPEED는 속도 상수
+			}
 		}
 	}
 }
