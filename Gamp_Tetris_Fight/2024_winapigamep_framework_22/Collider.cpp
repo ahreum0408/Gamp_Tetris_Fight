@@ -128,19 +128,23 @@ CollisionDirection Collider::GetCollisionDirection(const Vec2& objectPos, const 
 }
 Vec2 Collider::GetNormal(const Vec2& collisionPoint) const {
     Vec2 center = GetPosition(); // Collider의 중심 좌표
-    CollisionDirection direction = GetCollisionDirection(center, collisionPoint);
+    Vec2 size = GetSize();
 
-    // CollisionDirection에 따라 적절한 법선 벡터 반환
-    switch (direction) {
-    case CollisionDirection::Top:
-        return Vec2(0, -1); // 위쪽 법선
-    case CollisionDirection::Bottom:
-        return Vec2(0, 1);  // 아래쪽 법선
-    case CollisionDirection::Left:
-        return Vec2(-1, 0); // 왼쪽 법선
-    case CollisionDirection::Right:
-        return Vec2(1, 0);  // 오른쪽 법선
-    default:
-        return Vec2(0, 0);  // 안전을 위해 기본값 반환
+    float left = center.x - size.x / 2;
+    float right = center.x + size.x / 2;
+    float top = center.y - size.y / 2;
+    float bottom = center.y + size.y / 2;
+
+    if (fabs(collisionPoint.y - top) < fabs(collisionPoint.x - left) &&
+        fabs(collisionPoint.y - top) < fabs(collisionPoint.x - right)) {
+        return Vec2(0, -1);
     }
+    if (fabs(collisionPoint.y - bottom) < fabs(collisionPoint.x - left) &&
+        fabs(collisionPoint.y - bottom) < fabs(collisionPoint.x - right)) {
+        return Vec2(0, 1);
+    }
+    if (fabs(collisionPoint.x - left) < fabs(collisionPoint.y - top) &&
+        fabs(collisionPoint.x - left) < fabs(collisionPoint.y - bottom)) {
+    }
+    return Vec2(1, 0);
 }
