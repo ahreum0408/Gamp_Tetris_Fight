@@ -25,9 +25,23 @@ Board::Board() :
     m_pTex(nullptr), nextBlockTex(nullptr), myFont(nullptr)
 {
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
-    boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
-    this->SetName(L"Block");
 
+    // Board ¸®¼Â
+    boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
+    for (int i = 0; i < boardHeight; ++i)
+    {
+        for (int j = 0; j < boardWidth; ++j)
+        {
+            if (boardVec[i][j] != nullptr)
+            {
+                GET_SINGLE(EventManager)->DeleteObject(boardVec[i][j]);
+
+            }
+        }
+    }
+    boardVec.clear();
+
+    this->SetName(L"Block");
     AddFontResource(L"Font\\Galmuri11.ttf");
 
     // Sound
@@ -219,7 +233,6 @@ void Board::BuildBlock(Block_Parent* blockParent)
             return;
         }
         block->SetIsBulit(true);
-        GET_SINGLE(PlayerManager)->DefenderDieCheck(block);
         if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
         {
             if (boardVec[row][col] == nullptr)

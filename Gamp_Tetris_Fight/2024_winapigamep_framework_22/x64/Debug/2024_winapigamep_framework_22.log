@@ -1,2 +1,2 @@
-﻿  Defender.cpp
-  2024_winapigamep_framework_22.vcxproj -> C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\Output\build_debug\2024_winapigamep_framework_22.exe
+﻿  TimeManager.cpp
+C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\TimeManager.cpp(1,1): error C1090: PDB API를 호출하지 못했습니다. 오류 코드 '3': C:\GitHub\Cpp\Gamp_Tetris_Fight\Gamp_Tetris_Fight\2024_winapigamep_framework_22\x64\Debug\vc143.pdb

@@ -27,11 +27,6 @@ public:
     bool GetWiner() {
         return _isDefenderWiner;
     }
-
-    void DefenderDieCheck(Block* block)
-    {
-        _defender->DieCheck(block);
-    }
 private:
     Striker* _striker;
     Defender* _defender;
