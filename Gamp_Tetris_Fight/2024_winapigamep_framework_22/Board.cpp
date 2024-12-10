@@ -175,6 +175,8 @@ void Board::Update()
             {
                 currentMoveDownDelay = moveDownDelay;
 
+                currentBlock->SetIsStopBlock(true); // 고정된 블럭임을 알림
+
                 // 1. 블럭 쌓고
                 BuildBlock(currentBlock);
                 if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
