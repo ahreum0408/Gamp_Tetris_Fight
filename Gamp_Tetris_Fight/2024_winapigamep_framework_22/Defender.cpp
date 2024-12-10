@@ -18,7 +18,7 @@
 #include "PlayerManager.h"
 
 Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpCount(0), m_maxJumpCount(3), m_isGrounded(false) {
-    m_pCollider->SetSize({ 35,38 });
+    m_pCollider->SetSize({ 35,35 });
     m_pCollider->SetOffSetPos({ 2,0 });
     m_pCollider->SetIsTrigger(false);
 
@@ -31,16 +31,19 @@ Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpC
     m_velocity = GetComponent<Velocity>();
 
     m_stateMachine->ChangeState(new IdleState());
+
+    GET_SINGLE(PlayerManager)->SetDefender(this);
 }
 
 bool Defender::CanUseSkill() // 패딩은 언제가 가능함
 {
-    return true;
+    return m_defenceSkillCount > 0;
 }
 void Defender::UseSkill()
 {
     if (CanUseSkill()) {
         CreateDefendBlock();
+        m_defenceSkillCount--;
     }
 }
 void Defender::Update() {
@@ -69,6 +72,15 @@ void Defender::Update() {
     vPos.y += m_vVelocity.y * fDT;
     SetPos(vPos);
     Player::Update();
+
+    // 디펜스 수 증가
+    time += fDT; // DeltaTime을 이용해 시간 누적
+
+    if (time >= m_defenceSkillCoolTime) // 0.05초 간격으로 흔들기w
+    {
+        time = 0.0f; // 타이머 초기화
+        m_defenceSkillCount++; // 흔들림 횟수 감소
+    }
 }
 
 void Defender::EnterCollision(Collider* _other) {
@@ -79,12 +91,13 @@ void Defender::EnterCollision(Collider* _other) {
     }
     //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
     //if (direction == CollisionDirection::Top) {
-    //    cout << "enter.." << endl;
     //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
-    //    if (!block->GetIsDefence() || block->GetIsBulit()) {
-    //        cout << "수비수 배패.." << endl;
-    //        GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-    //        GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //    if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
+    //        if (!block->GetIsDefence() || block->GetIsBulit()) {
+    //            cout << "수비수 배패.." << endl;
+    //            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+    //            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //        }
     //    }
     //}
 }
@@ -93,10 +106,12 @@ void Defender::StayCollision(Collider* _other)
     //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
     //if (direction == CollisionDirection::Top) {
     //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
-    //    if (!block->GetIsDefence() || block->GetIsBulit()) {
-    //        cout << "수비수 배패.." << endl;
-    //        GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-    //        GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //    if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
+    //        if (!block->GetIsDefence() || block->GetIsBulit()) {
+    //            cout << "수비수 배패.." << endl;
+    //            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+    //            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //        }
     //    }
     //}
 }
@@ -138,10 +153,12 @@ void Defender::DieCheck(Block* block)
     if (vPos.x >= targetPos.x - BLOCK_SIZE / 2 && vPos.x <= targetPos.x + BLOCK_SIZE / 2
         && vPos.y >= targetPos.y - BLOCK_SIZE / 2 && vPos.y <= targetPos.y - BLOCK_SIZE / 2)
     {
-        if (!block->GetIsDefence() || block->GetIsBulit()) {
-            cout << "수비수 배패.." << endl;
-            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+        if (!block->GetIsStop()) {
+            if (!block->GetIsDefence() || block->GetIsBulit()) {
+                cout << "수비수 배패.." << endl;
+                GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+                GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+            }
         }
     }
 }

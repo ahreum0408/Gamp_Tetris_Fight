@@ -22,6 +22,11 @@ public:
     void SetIsDefence(bool isDefence) override;
     bool GetIsDefence() override;
     bool IsAllChildAlive() override;
+    void SetIsStopBlock(bool isStop) override {
+        for (auto block : blockVec) {
+            block->SetIsStop(isStop);
+        }
+    }
 public:
     void SetDir(Vec2 _dir)
     {

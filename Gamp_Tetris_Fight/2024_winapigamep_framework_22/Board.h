@@ -40,6 +40,9 @@ private:
     int skillCnt = 0;
     int canSkillCnt = 2;
 
+    // 블럭이 큉기는 중인지
+    bool m_isFireing = false;
+
     Texture* m_pTex;
     HFONT myFont;
 
