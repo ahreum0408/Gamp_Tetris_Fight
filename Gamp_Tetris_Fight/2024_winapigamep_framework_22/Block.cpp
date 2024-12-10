@@ -116,7 +116,7 @@ Vec2 Block::GetRandomDirection() {
 void Block::EnterCollision(Collider* _other)
 {
 	wstring name = _other->GetOwner()->GetName();
-	if (name == L"DefendBlock") {
+	if (name == L"DefendBlock" && !m_built) {
 		if (m_parent) {
 			m_parent->SetIsDefence(true);
 		}

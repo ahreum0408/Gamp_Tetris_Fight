@@ -23,7 +23,7 @@ public:
     virtual void SetIsDefence(bool isDefence) abstract;
     virtual bool GetIsDefence() abstract;
 
-    virtual void SetIsStopBlock(bool isDtop)abstract;
+    virtual void SetIsBulit(bool isBulit)abstract;
 
     virtual bool IsAllChildAlive() abstract;
 };

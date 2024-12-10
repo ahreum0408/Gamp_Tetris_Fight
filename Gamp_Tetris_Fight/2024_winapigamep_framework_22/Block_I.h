@@ -22,9 +22,9 @@ public:
     void SetIsDefence(bool isDefence) override;
     bool GetIsDefence() override;
     bool IsAllChildAlive() override;
-    void SetIsStopBlock(bool isStop) override {
+    void SetIsBulit(bool isBulit) override {
         for (auto block : blockVec) {
-            block->SetIsStop(isStop);
+            block->SetIsBulit(isBulit);
         }
     }
 private:

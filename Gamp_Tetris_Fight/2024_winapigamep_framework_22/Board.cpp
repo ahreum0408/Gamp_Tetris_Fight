@@ -174,9 +174,6 @@ void Board::Update()
             if (CheckFloor(currentBlock->GetBlocks()))
             {
                 currentMoveDownDelay = moveDownDelay;
-
-                currentBlock->SetIsStopBlock(true); // 고정된 블럭임을 알림
-
                 // 1. 블럭 쌓고
                 BuildBlock(currentBlock);
                 if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
@@ -224,7 +221,9 @@ void Board::BuildBlock(Block_Parent* blockParent)
             GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
             return;
         }
-        block->SetIsBulit(true);
+
+        currentBlock->SetIsBulit(true); // 자식들까지 모두 바꿔줌
+
         GET_SINGLE(PlayerManager)->DefenderDieCheck(block);
         if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
         {

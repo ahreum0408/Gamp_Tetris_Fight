@@ -34,12 +34,6 @@ public:
 	bool GetIsBulit() {
 		return m_built;
 	}
-	void SetIsStop(bool isStop) {
-		m_isStop = isStop;
-	}
-	bool GetIsStop() {
-		return m_isStop;
-	}
 private:
 	void StartFireBlock();
 	Vec2 GetDirection(Collider* _other, const Vec2& point);
@@ -50,7 +44,6 @@ public:
 	virtual void ExitCollision(Collider* _other);
 private:
 	bool m_defence = false;
-	bool m_isStop = false;
 	bool m_built = false;
 	Vec2 m_vDir;
 	Texture* m_pTex;
