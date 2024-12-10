@@ -30,7 +30,7 @@ public:
 
     void DefenderDieCheck(Block* block)
     {
-        //_defender->DieCheck(block);
+        _defender->DieCheck(block);
     }
 private:
     Striker* _striker;

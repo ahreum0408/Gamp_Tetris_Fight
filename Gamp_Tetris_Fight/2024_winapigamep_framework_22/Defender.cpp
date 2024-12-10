@@ -145,15 +145,14 @@ void Defender::DieCheck(Block* block)
 {
     Vec2 vPos = GetPos();
     Vec2 targetPos = block->GetPos();
-    if (vPos.x >= targetPos.x - BLOCK_SIZE / 2 && vPos.x <= targetPos.x + BLOCK_SIZE / 2
-        && vPos.y >= targetPos.y - BLOCK_SIZE / 2 && vPos.y <= targetPos.y - BLOCK_SIZE / 2)
+    if (vPos.x >= targetPos.x - (BLOCK_SIZE / 2) && vPos.x <= targetPos.x + (BLOCK_SIZE / 2)
+        && vPos.y >= targetPos.y - (BLOCK_SIZE / 2) && vPos.y <= targetPos.y + (BLOCK_SIZE / 2))
     {
-        if (!block->GetIsStop()) {
-            if (!block->GetIsDefence() || block->GetIsBulit()) {
-                cout << "수비수 배패.." << endl;
-                GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-                GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
-            }
+        //if (!block->GetIsDefence() || block->GetIsBulit()) {
+        if (block->GetIsBulit()) {
+            cout << "수비수 배패.." << endl;
+            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
         }
     }
 }
