@@ -31,6 +31,8 @@ Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpC
     m_velocity = GetComponent<Velocity>();
 
     m_stateMachine->ChangeState(new IdleState());
+
+    GET_SINGLE(PlayerManager)->SetDefender(this);
 }
 
 bool Defender::CanUseSkill() // 패딩은 언제가 가능함
@@ -87,31 +89,31 @@ void Defender::EnterCollision(Collider* _other) {
         m_vVelocity.y = 0; // 중력 가속도를 초기화
         SetJumpCount();
     }
-    CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
-    if (direction == CollisionDirection::Top) {
-        Block* block = dynamic_cast<Block*>(_other->GetOwner());
-        if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
-            if (!block->GetIsDefence() || block->GetIsBulit()) {
-                cout << "수비수 배패.." << endl;
-                GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-                GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
-            }
-        }
-    }
+    //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
+    //if (direction == CollisionDirection::Top) {
+    //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
+    //    if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
+    //        if (!block->GetIsDefence() || block->GetIsBulit()) {
+    //            cout << "수비수 배패.." << endl;
+    //            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+    //            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //        }
+    //    }
+    //}
 }
 void Defender::StayCollision(Collider* _other)
 {
-    CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
-    if (direction == CollisionDirection::Top) {
-        Block* block = dynamic_cast<Block*>(_other->GetOwner());
-        if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
-            if (!block->GetIsDefence() || block->GetIsBulit()) {
-                cout << "수비수 배패.." << endl;
-                GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-                GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
-            }
-        }
-    }
+    //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
+    //if (direction == CollisionDirection::Top) {
+    //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
+    //    if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
+    //        if (!block->GetIsDefence() || block->GetIsBulit()) {
+    //            cout << "수비수 배패.." << endl;
+    //            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
+    //            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
+    //        }
+    //    }
+    //}
 }
 void Defender::ExitCollision(Collider* _other)
 {
