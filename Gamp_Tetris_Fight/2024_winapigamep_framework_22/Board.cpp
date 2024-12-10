@@ -48,8 +48,6 @@ Board::~Board()
         }
     }
     boardVec.clear();
-
-    //::DeleteObject(myFont);
 }
 
 void Board::Render(HDC _hdc)
@@ -103,7 +101,7 @@ void Board::Render(HDC _hdc)
             , 0                        // 정밀도
             , 0                        // 정밀도
             , L"DNFBitBitv2"           // 글꼴이름
-        ); 
+        );
         HFONT oldFont = (HFONT)::SelectObject(_hdc, myFont);
         //SetTextColor(_hdc, RGB(0, 0, 0));
         //SetTextColor(_hdc, RGB(255, 255, 255));
@@ -192,8 +190,6 @@ void Board::Update()
             {
                 currentMoveDownDelay = moveDownDelay;
 
-                currentBlock->SetIsStopBlock(true); // 고정된 블럭임을 알림
-
                 // 1. 블럭 쌓고
                 BuildBlock(currentBlock);
                 if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
@@ -247,6 +243,8 @@ void Board::BuildBlock(Block_Parent* blockParent)
             if (boardVec[row][col] == nullptr)
                 boardVec[row][col] = block;
         }
+
+        GET_SINGLE(PlayerManager)->DefenderDieCheck(block);
     }
 }
 
