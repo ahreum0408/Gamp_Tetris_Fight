@@ -119,11 +119,13 @@ void Board::Update()
     if (currentBlock->IsAllChildAlive()) {
         currentMoveDownDelay = moveDownDelay;
 
-        currentBlock = nullptr; // 사실 안해도 되는데 이거 안해주면 메모리가 빌거야
+        currentBlock = nullptr;
         CreateBlock();
+        m_isFireing = false;
+        cout << m_isFireing << endl;
     }
 #pragma region BlockMove
-    if (currentBlock)
+    if (currentBlock && !m_isFireing)
     {
         if (!isSkill)
         {
@@ -138,7 +140,6 @@ void Board::Update()
                     currentBlock->Rotate();
                 }
             }
-
             // A, D 키를 눌러 블록 이동
             if (GET_KEYDOWN(KEY_TYPE::A))
             {
@@ -154,7 +155,6 @@ void Board::Update()
             }
 
         }
-
         // LSHIFT 키를 눌러 블록 쾅 찍기
         if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
         {
@@ -188,6 +188,10 @@ void Board::Update()
             }
             if (!currentBlock->GetIsDefence()) {
                 currentBlock->MoveDown(); // 이게 바닥에 내리는거
+            }
+            else {
+                m_isFireing = true;
+                cout << m_isFireing << endl;
             }
             moveDownTimer = 0;
         }
