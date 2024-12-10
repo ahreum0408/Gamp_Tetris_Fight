@@ -17,18 +17,16 @@
 #include "Block_T.h"
 #include "Block_Z.h"
 #include "Camera.h"
-#include "GDISelector.h"
 
 Board::Board() :
     boardWidth(10), boardHeight(19), isSkill(false),
     currentBlock(nullptr), nextBlock(BLOCK_TYPE::NONE),
-    m_pTex(nullptr), nextBlockTex(nullptr), myFont(nullptr)
+    m_pTex(nullptr), nextBlockTex(nullptr)
 {
     m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Board", L"Texture\\gamp-background.bmp");
     boardVec.resize(boardHeight, std::vector<Block*>(boardWidth));
-    this->SetName(L"Block");
 
-    AddFontResource(L"Font\\Galmuri11.ttf");
+    this->SetName(L"Block");
 
     // Sound
     GET_SINGLE(ResourceManager)->LoadSound(L"BlockBreak", L"Sound\\BlockBreak.wav", false);
@@ -38,7 +36,20 @@ Board::Board() :
 
 Board::~Board()
 {
-    ::DeleteObject(myFont);
+    // Board 리셋
+    for (int i = 0; i < boardHeight; ++i)
+    {
+        for (int j = 0; j < boardWidth; ++j)
+        {
+            if (boardVec[i][j] != nullptr)
+            {
+                GET_SINGLE(EventManager)->DeleteObject(boardVec[i][j]);
+            }
+        }
+    }
+    boardVec.clear();
+
+    //::DeleteObject(myFont);
 }
 
 void Board::Render(HDC _hdc)
@@ -77,12 +88,12 @@ void Board::Render(HDC _hdc)
     }
 
     {
-        myFont = ::CreateFont(
-            20                       // 높이
+        HFONT myFont = ::CreateFont(
+            20                         // 높이
             , 0                        // 폭 0이면 높이와 비례
             , 0                        // 글자 전체 기울기
             , 0                        // 기준선이 정해진 기울기
-            , 0                  // 폰트의 두께
+            , 0                       // 폰트의 두께
             , 0                        // 이탤릭
             , 0                        // 밑줄
             , 0                        // 취소선
@@ -91,25 +102,31 @@ void Board::Render(HDC _hdc)
             , 0                        // 정밀도
             , 0                        // 정밀도
             , 0                        // 정밀도
-            , L"Galmuri11"        // 글꼴이름
-        );
-        GDISelector font(_hdc, myFont);
-        SetTextColor(_hdc, RGB(255, 255, 255));
+            , L"DNFBitBitv2"           // 글꼴이름
+        ); 
+        HFONT oldFont = (HFONT)::SelectObject(_hdc, myFont);
+        //SetTextColor(_hdc, RGB(0, 0, 0));
+        //SetTextColor(_hdc, RGB(255, 255, 255));
 
-        // 스킬
-        wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetSkillCount());
-        TextOut(_hdc, 120, 60, wstr.c_str(), wstr.length());
+        {
+            // 스킬
+            wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetSkillCount());
+            TextOut(_hdc, 120, 60, wstr.c_str(), wstr.length());
 
-        // 공격수
-        TextOut(_hdc, GetPos().x + 110, 180, L"[공격수]", wcslen(L"[공격수]"));
-        TextOut(_hdc, GetPos().x + 110, 215, L"블럭 회전 : W", wcslen(L"블럭 회전 : W"));
-        TextOut(_hdc, GetPos().x + 110, 250, L"좌우이동 : A, D", wcslen(L"좌우이동 : A, D"));
-        TextOut(_hdc, GetPos().x + 110, 285, L"스킬 : LShift", wcslen(L"스킬 : LShift"));
-        // 수비수
-        TextOut(_hdc, GetPos().x + 110, 350, L"[수비수]", wcslen(L"[수비수]"));
-        TextOut(_hdc, GetPos().x + 110, 385, L"좌우이동 : 오른쪽 왼쪽 화살표", wcslen(L"좌우이동 : 오른쪽 왼쪽 화살표"));
-        TextOut(_hdc, GetPos().x + 110, 420, L"점프 : 위쪽 화살표", wcslen(L"점프 : 위쪽 화살표"));
-        TextOut(_hdc, GetPos().x + 110, 455, L"패딩 : Space", wcslen(L"패딩 : Space"));
+            // 공격수
+            TextOut(_hdc, GetPos().x + 110, 180, L"[공격수]", wcslen(L"[공격수]"));
+            TextOut(_hdc, GetPos().x + 110, 215, L"블럭 회전 : W", wcslen(L"블럭 회전 : W"));
+            TextOut(_hdc, GetPos().x + 110, 250, L"좌우이동 : A, D", wcslen(L"좌우이동 : A, D"));
+            TextOut(_hdc, GetPos().x + 110, 285, L"스킬 : LShift", wcslen(L"스킬 : LShift"));
+            // 수비수
+            TextOut(_hdc, GetPos().x + 110, 350, L"[수비수]", wcslen(L"[수비수]"));
+            TextOut(_hdc, GetPos().x + 110, 385, L"좌우이동 : 오른쪽 왼쪽 화살표", wcslen(L"좌우이동 : 오른쪽 왼쪽 화살표"));
+            TextOut(_hdc, GetPos().x + 110, 420, L"점프 : 위쪽 화살표", wcslen(L"점프 : 위쪽 화살표"));
+            TextOut(_hdc, GetPos().x + 110, 455, L"패딩 : Space", wcslen(L"패딩 : Space"));
+        }
+
+        SelectObject(_hdc, oldFont);
+        DeleteObject(myFont);
     }
 }
 
@@ -174,6 +191,9 @@ void Board::Update()
             if (CheckFloor(currentBlock->GetBlocks()))
             {
                 currentMoveDownDelay = moveDownDelay;
+
+                currentBlock->SetIsStopBlock(true); // 고정된 블럭임을 알림
+
                 // 1. 블럭 쌓고
                 BuildBlock(currentBlock);
                 if (!isSkill) GET_SINGLE(ResourceManager)->Play(L"BlockDown");
@@ -221,10 +241,7 @@ void Board::BuildBlock(Block_Parent* blockParent)
             GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
             return;
         }
-
-        currentBlock->SetIsBulit(true); // 자식들까지 모두 바꿔줌
-
-        GET_SINGLE(PlayerManager)->DefenderDieCheck(block);
+        block->SetIsBulit(true);
         if (row >= 0 && row < boardHeight && col >= 0 && col < boardWidth)
         {
             if (boardVec[row][col] == nullptr)
