@@ -99,8 +99,8 @@ Vec2 Block::GetDirection(Collider* _other, const Vec2& point) {
 	return reflectedDir; // 반사 방향 반환
 }
 Vec2 Block::GetRandomDirection() {
-	float minAngle = -120.f * (M_PI / 180.f);
-	float maxAngle = 120.f * (M_PI / 180.f);
+	float minAngle = -110.f * (M_PI / 180.f);
+	float maxAngle = 110.f * (M_PI / 180.f);
 	float randomAngle = minAngle + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxAngle - minAngle)));
 
 	float x = cos(randomAngle);

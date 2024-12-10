@@ -69,15 +69,5 @@ void Striker::ShakeCamera()
 	m_camera->StartShake();
 }
 void Striker::Update() {
-	Vec2 vPos = GetPos();
-
-	if (GET_KEYDOWN(m_leftMoveKey)) {
-		vPos.x -= 40.f;
-	}
-	if (GET_KEYDOWN(m_rightMoveKey)) {
-		vPos.x += 40.f;
-	}
-
-	SetPos(vPos);
 	Player::Update();
 }

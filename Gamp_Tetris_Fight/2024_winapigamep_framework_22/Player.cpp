@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Velocity.h"
+#include "TimeManager.h"
 
 Player::Player() : m_leftMoveKey(KEY_TYPE::A), m_rightMoveKey(KEY_TYPE::D)
 {
@@ -23,6 +24,13 @@ Player::~Player()
 void Player::Update()
 {
 	Vec2 vPos = GetPos();
+
+	if (GET_KEY(m_leftMoveKey) && m_canMoveLeft) {
+		vPos.x -= 100.f * fDT;
+	}
+	if (GET_KEY(m_rightMoveKey) && m_canMoveRight) {
+		vPos.x += 100.f * fDT;
+	}
 
 	vPos.x = std::clamp(vPos.x, minX, maxX);
 

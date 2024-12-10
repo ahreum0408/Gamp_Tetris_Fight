@@ -50,12 +50,6 @@ void Defender::Update() {
     Vec2 vPos = GetPos();
     m_beforePos = vPos;
 
-    if (GET_KEY(m_leftMoveKey) && m_canMoveLeft) {
-        vPos.x -= 100.f * fDT;
-    }
-    if (GET_KEY(m_rightMoveKey) && m_canMoveRight) {
-        vPos.x += 100.f * fDT;
-    }
     if (GET_KEYDOWN(KEY_TYPE::SPACE)) {
         UseSkill();
     }
@@ -71,10 +65,11 @@ void Defender::Update() {
     // 위치 업데이트
     vPos.y += m_vVelocity.y * fDT;
     SetPos(vPos);
-    Player::Update();
 
     // 디펜스 수 증가
     time += fDT; // DeltaTime을 이용해 시간 누적
+
+    Player::Update();
 
     if (time >= m_defenceSkillCoolTime) // 0.05초 간격으로 흔들기w
     {
