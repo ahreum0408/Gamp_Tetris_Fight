@@ -6,7 +6,7 @@ void ResourceManager::Init()
 {
 	::GetCurrentDirectory(255, m_resourcePath);
 	wcscat_s(m_resourcePath, 255, L"\\Resource\\");
-	::SetWindowText(GET_SINGLE(Core)->GetHwnd(), m_resourcePath);
+	//::SetWindowText(GET_SINGLE(Core)->GetHwnd(), m_resourcePath);
 
  	FMOD::System_Create(&m_pSoundSystem); // 시스템 생성 함수
 	// 채널수, 사운드 모드
@@ -15,7 +15,6 @@ void ResourceManager::Init()
 
 	// Font
 	int font = AddFontResourceEx(L"Resource\\Font\\DNFBitBitv2.ttf", FR_PRIVATE, NULL);
-	cout << "font : " << font << endl;
 }
 
 Texture* ResourceManager::TextureLoad(const wstring& _key, const wstring& _path)

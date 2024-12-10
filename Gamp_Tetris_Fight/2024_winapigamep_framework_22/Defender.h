@@ -47,7 +47,7 @@ private:
 	int m_jumpCount;
 	const int m_maxJumpCount;
 
-	int m_defenceSkillCount = 1;
+	int m_defenceSkillCount = 0;
 	int m_defenceSkillCoolTime = 20;
 	float time;
 
@@ -61,5 +61,4 @@ private:
 	Vec2 m_beforePos;
 	Collider* m_jumpCollider;
 	Velocity* m_velocity;
-
 };

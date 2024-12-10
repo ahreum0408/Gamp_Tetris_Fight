@@ -84,31 +84,9 @@ void Defender::EnterCollision(Collider* _other) {
         m_vVelocity.y = 0; // 중력 가속도를 초기화
         SetJumpCount();
     }
-    //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
-    //if (direction == CollisionDirection::Top) {
-    //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
-    //    if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
-    //        if (!block->GetIsDefence() || block->GetIsBulit()) {
-    //            cout << "수비수 배패.." << endl;
-    //            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-    //            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
-    //        }
-    //    }
-    //}
 }
 void Defender::StayCollision(Collider* _other)
 {
-    //CollisionDirection direction = m_pCollider->GetCollisionDirection(GetPos(), _other->GetOwnerPos());
-    //if (direction == CollisionDirection::Top) {
-    //    Block* block = dynamic_cast<Block*>(_other->GetOwner());
-    //    if (!block->GetIsStop()) { // 블럭이 정지하지 않았고
-    //        if (!block->GetIsDefence() || block->GetIsBulit()) {
-    //            cout << "수비수 배패.." << endl;
-    //            GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
-    //            GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");
-    //        }
-    //    }
-    //}
 }
 void Defender::ExitCollision(Collider* _other)
 {
@@ -124,10 +102,12 @@ void Defender::Jump() {
         m_isGrounded = false;         // 점프 상태로 전환
         m_jumpCount++;
 
-        Vec2 vPos = GetPos();
-        m_vVelocity.y = -m_jumpPower; // 위쪽으로 힘을 가함
-        vPos.y += m_vVelocity.y * fDT;
-        SetPos(vPos);
+        if (m_velocity) {
+            Vec2 vPos = GetPos();
+            m_vVelocity.y = -m_jumpPower; // 위쪽으로 힘을 가함
+            vPos.y += m_vVelocity.y * fDT;
+            SetPos(vPos);
+        }
     }
 }
 void Defender::CreateDefendBlock()
@@ -148,8 +128,7 @@ void Defender::DieCheck(Block* block)
     if (vPos.x >= targetPos.x - (BLOCK_SIZE / 2) && vPos.x <= targetPos.x + (BLOCK_SIZE / 2)
         && vPos.y >= targetPos.y - (BLOCK_SIZE / 2) && vPos.y <= targetPos.y + (BLOCK_SIZE / 2))
     {
-        //if (!block->GetIsDefence() || block->GetIsBulit()) {
-        if (block->GetIsBulit()) {
+        if (!block->GetIsDefence() || block->GetIsBulit()) {
             cout << "수비수 배패.." << endl;
             GET_SINGLE(PlayerManager)->SetDefenerWiner(false);
             GET_SINGLE(EventManager)->ChangeScene(L"GameOverScene");

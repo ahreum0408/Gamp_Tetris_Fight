@@ -170,7 +170,6 @@ void Board::Update()
                 if (CheckClampRight(currentBlock->GetBlocks()))
                     currentBlock->MoveSide(true);
             }
-
         }
         // LSHIFT Å°¸¦ ´­·¯ ºí·Ï Äç Âï±â
         if (GET_KEYDOWN(KEY_TYPE::LSHIFT))
