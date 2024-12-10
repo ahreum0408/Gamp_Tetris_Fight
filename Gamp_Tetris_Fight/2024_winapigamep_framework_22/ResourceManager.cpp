@@ -13,6 +13,9 @@ void ResourceManager::Init()
 	if (m_pSoundSystem != nullptr)
 		m_pSoundSystem->init((int)SOUND_CHANNEL::END, FMOD_INIT_NORMAL, nullptr);
 
+	// Font
+	int font = AddFontResourceEx(L"Resource\\Font\\DNFBitBitv2.ttf", FR_PRIVATE, NULL);
+	cout << "font : " << font << endl;
 }
 
 Texture* ResourceManager::TextureLoad(const wstring& _key, const wstring& _path)
@@ -62,6 +65,8 @@ void ResourceManager::Release()
 	// 다 쓰고 난 후 시스템 닫고 반환
 	m_pSoundSystem->close();
 	m_pSoundSystem->release();
+
+	RemoveFontResourceEx(L"Resource\\Font\\DNFBitBitv2.ttf", FR_PRIVATE, NULL);
 }
 
 void ResourceManager::LoadSound(const wstring& _key, const wstring& _path, bool _isLoop)
