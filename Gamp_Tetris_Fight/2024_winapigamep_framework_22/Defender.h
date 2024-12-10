@@ -35,6 +35,8 @@ private:
 	bool IsGround(Collider* other);
 	bool IsBlock(Collider* other);
 	void SetJumpCount() { m_jumpCount = 0; }
+public:
+	int GetSkillCount() { return m_defenceSkillCount; }
 private:
 	enum class DefenderState {
 		Idle, Jump, Fall
@@ -44,6 +46,10 @@ private:
 	StateMachine<Defender>* m_stateMachine;
 	int m_jumpCount;
 	const int m_maxJumpCount;
+
+	int m_defenceSkillCount = 1;
+	int m_defenceSkillCoolTime = 20;
+	float time;
 
 	bool m_isGrounded;
 	bool m_isBlockAbove = false;

@@ -35,12 +35,13 @@ Defender::Defender() : m_stateMachine(new StateMachine<Defender>(this)), m_jumpC
 
 bool Defender::CanUseSkill() // 패딩은 언제가 가능함
 {
-    return true;
+    return m_defenceSkillCount > 0;
 }
 void Defender::UseSkill()
 {
     if (CanUseSkill()) {
         CreateDefendBlock();
+        m_defenceSkillCount--;
     }
 }
 void Defender::Update() {
@@ -69,6 +70,15 @@ void Defender::Update() {
     vPos.y += m_vVelocity.y * fDT;
     SetPos(vPos);
     Player::Update();
+
+    // 디펜스 수 증가
+    time += fDT; // DeltaTime을 이용해 시간 누적
+
+    if (time >= m_defenceSkillCoolTime) // 0.05초 간격으로 흔들기w
+    {
+        time = 0.0f; // 타이머 초기화
+        m_defenceSkillCount++; // 흔들림 횟수 감소
+    }
 }
 
 void Defender::EnterCollision(Collider* _other) {
