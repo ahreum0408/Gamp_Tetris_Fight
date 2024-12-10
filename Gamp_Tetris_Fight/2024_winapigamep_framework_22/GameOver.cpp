@@ -11,7 +11,7 @@ GameOver::GameOver() :
 	// 둘 중 누가 이겼는지 빨간 디노인지
 	cout << GET_SINGLE(PlayerManager)->GetWiner() << endl;
 	if (GET_SINGLE(PlayerManager)->GetWiner())
-		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\RedDinoWin.bmp");
+		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RedDinoWin", L"Texture\\GameOverScene\\RedDinoWin.bmp");
 	else
 		m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"GreenDinoWin", L"Texture\\GameOverScene\\GreenDinoWin.bmp");
 
