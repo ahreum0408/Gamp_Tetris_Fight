@@ -87,7 +87,7 @@ void Board::Render(HDC _hdc)
 
     {
         HFONT myFont = ::CreateFont(
-            20                         // 높이
+            30                         // 높이
             , 0                        // 폭 0이면 높이와 비례
             , 0                        // 글자 전체 기울기
             , 0                        // 기준선이 정해진 기울기
@@ -100,16 +100,18 @@ void Board::Render(HDC _hdc)
             , 0                        // 정밀도
             , 0                        // 정밀도
             , 0                        // 정밀도
-            , L"DNFBitBitv2"           // 글꼴이름
+            , L"던파 비트비트체 v2"           // 글꼴이름
         );
         HFONT oldFont = (HFONT)::SelectObject(_hdc, myFont);
-        //SetTextColor(_hdc, RGB(0, 0, 0));
-        //SetTextColor(_hdc, RGB(255, 255, 255));
+        SetTextColor(_hdc, RGB(255, 255, 255));
+        SetBkMode(_hdc, TRANSPARENT);
 
         {
             // 스킬
-            wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetSkillCount());
+            wstring wstr = L"공격수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetStrikerSkillCount());
             TextOut(_hdc, 120, 60, wstr.c_str(), wstr.length());
+            wstr = L"수비수 스킬 수 : " + std::to_wstring(GET_SINGLE(PlayerManager)->GetDefenderSkillCount());
+            TextOut(_hdc, 120, 95, wstr.c_str(), wstr.length());
 
             // 공격수
             TextOut(_hdc, GetPos().x + 110, 180, L"[공격수]", wcslen(L"[공격수]"));

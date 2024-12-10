@@ -20,7 +20,8 @@ public:
     bool StrikerUseSkill() {
         return _striker->UseSkill();
     }
-    int GetSkillCount() { return _striker->GetSkillCount(); }
+    int GetStrikerSkillCount() { return _striker->GetSkillCount(); }
+    int GetDefenderSkillCount() { return _defender->GetSkillCount(); }
     void SetDefenerWiner(bool isWin) {
         _isDefenderWiner = isWin;
     }
