@@ -32,19 +32,19 @@ private:
 
     // Block Down
     int moveDownTimer = 0;
-    int currentMoveDownDelay = 50;
-    const int moveDownDelay = 50;
+    int currentMoveDownDelay = 30;
+    const int moveDownDelay = 30;
 
     // Skill
     bool isSkill = false;
     int skillCnt = 0;
-    int canSkillCnt = 2;
+    int canSkillCnt = 1;
 
     // 블럭이 큉기는 중인지
     bool m_isFireing = false;
 
     Texture* m_pTex;
-    HFONT myFont;
+    //HFONT myFont;
 
     // 2D 배열로 보드 상태 관리
     vector<vector<Block*>> boardVec;
